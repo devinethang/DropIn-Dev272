@@ -4,7 +4,7 @@ Drop In is an app for everyone to get information about local sporting events in
 
 # Drop In - Roles
 devinethang (Devin) - Project Manager, UI/UX Designer, and DevOps
-Alexander Morari - Backend Developer and Integrator
+alexmorari7 (Alexander Morari) - Backend Developer and Integrator
 jordangatewood28 (Jordan) - Frontend Developer
 MM-109 (Mumtaas) - QA Engineer
 
