@@ -1,6 +1,6 @@
 {
   "name": "Drop in",
-  "description": "A meetup app to play sports.",
+  "description": "A meetup app to play and watch sports.",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "dependencies": {
