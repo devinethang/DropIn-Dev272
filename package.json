@@ -1,5 +1,5 @@
 {
-  "name": "Drop in",
+  "name": "dropin",
   "description": "A meetup app to play and watch sports.",
   "main": "expo-router/entry",
   "version": "1.0.0",
