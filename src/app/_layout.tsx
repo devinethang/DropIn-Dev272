@@ -4,8 +4,13 @@ import { Stack } from "expo-router";
 // Week 3 replaces this with Stack + Tabs layouts.
 export default function RootLayout() {
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ title: "DEV 272" }} />
+    <Stack 
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Create" options={{ title: "Create" }} />
+      <Stack.Screen name="Sign-In" options={{ title: "Sign In" }} />
     </Stack>
   );
 }

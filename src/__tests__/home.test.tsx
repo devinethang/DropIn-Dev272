@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react-native";
 
-import Index from "@/app/index";
+import Index from "@/app/(tabs)/index";
 
 // Test files live outside src/app: every file in app/ is treated as a route.
 // This starter test proves Jest works. Replace it when you replace the screen.
