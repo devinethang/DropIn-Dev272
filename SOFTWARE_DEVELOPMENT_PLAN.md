@@ -10,31 +10,31 @@
 
 ## 1. Project Overview
 
-This project aims to develop a mobile application that connects people through sports by helping them discover, organize, and attend local sporting events.
+This project aims to develop a mobile application that connects people through recreational sports by helping them discover, organize, and participate in local sporting games.
 
-The app will equally support two types of activities: playing sports and attending sports watch parties. Users who want to participate in recreational games can find other players, while sports fans who prefer watching can discover watch parties and connect with people who share their interests.
+The app will focus on recreational sports participation. Users can discover games in their community, create their own games, view game details, and join activities organized by other users.
 
-Users will be able to explore public events, view event details, create events, and join activities. The app will also include an invitation area for events organized by friends and family.
+Users will be able to browse available games, view upcoming games they have created or joined, and manage their participation. The application will provide a straightforward experience for people who want to connect with others through sports.
 
 ### Problem
 
-People may have difficulty finding others to play sports with or attend sporting events together.
+People may have difficulty finding others to play recreational sports with, especially when they do not have enough players to organize a game.
 
 ### Target Users
 
 - **Recreational Player:** A college student who enjoys playing volleyball but struggles to find enough people to organize a game.
-- **Sports Spectator:** A sports fan who enjoys watching matches with others but doesn't always have friends available to attend watch parties.
+- **Community Sports Enthusiast:** Someone who enjoys recreational basketball, soccer, or other sports and wants to discover local games and connect with other players.
 
 ### Purpose
 
-To make it easier for people to connect through sports, whether they want to play or watch.
+To make it easier for people to connect through recreational sports by discovering, organizing, and joining local games.
 
 ### Objectives
 
-- Develop a functional mobile application that supports both recreational sports and sports watch parties.
-- Allow users to discover, create, and join sporting events.
+- Develop a functional mobile application that supports recreational sports participation.
+- Allow users to discover, create, and join local sporting games.
 - Provide an accessible and straightforward navigation experience.
-- Store event information remotely and maintain relevant user preferences locally.
+- Store game information remotely and maintain relevant user preferences locally.
 - Validate the application's functionality through testing and quality assurance.
 - Demonstrate effective collaboration, version control, and project management.
 
@@ -51,11 +51,11 @@ To make it easier for people to connect through sports, whether they want to pla
 
 ### Core Application Features
 
-1. **Explore Events:** Browse sporting events and filter between Play and Watch activities.
-2. **Create Events:** Organize recreational games or sports watch parties.
-3. **Event Participation:** View event information and join or leave events.
-4. **Invitations:** View and respond to invitations from friends and family.
-5. **My Events:** View upcoming events created or joined by the user.
+1. **Home:** Browse available recreational sports games and access game details.
+2. **Create Game:** Organize a recreational sports game by entering the required information.
+3. **Game Detail:** View game information, including sport, date, time, location, and description.
+4. **Game Participation:** Join or leave available games.
+5. **My Games:** View upcoming games created or joined by the user.
 
 ---
 
@@ -63,24 +63,26 @@ To make it easier for people to connect through sports, whether they want to pla
 
 ### In Scope
 
-- Home screen with search, a featured upcoming event, and navigation to Explore and Offers/Invites.
-- Event discovery for both playing sports and attending watch parties.
-- Event details include sport, event type, date, time, location, and description.
-- Create-event form with validation.
-- Join and leave event functionality.
-- My Events screen.
-- Basic invitations, subject to team feasibility review.
-- Remote event storage and data retrieval.
+- Home screen displaying available recreational sports games.
+- My Games screen for games created or joined by the user.
+- Game Detail screen with sport, date, time, location, and description.
+- Create Game form with validation.
+- Join and leave game functionality.
+- Remote game storage and data retrieval.
 - Local persistence for selected user preferences.
-- Navigation, loading states, error handling, and testing.
+- Navigation using the approved Expo Router structure.
+- Loading states, error handling, accessibility, and testing.
+- Consistent UI components based on the approved wireframes.
 
 ### Out of Scope
 
+- Sports watch parties and spectator event discovery.
 - Live sports scores and match statistics.
 - Ticket purchasing and payment processing.
 - Real-time messaging and video calls.
 - Advanced social networking features.
 - Complex tournament management.
+- Friend and family invitation functionality.
 
 ---
 
@@ -102,19 +104,18 @@ To make it easier for people to connect through sports, whether they want to pla
 
 | Deliverable | Owner |
 |---|---|
-| Software Development Plan | Team, coordinated by `devinethang` |
-| Wireframes and user-flow diagram | `devinethang`, with team feedback |
+| Software Development Plan | `MM-109`, with team feedback |
+| Wireframes and user-flow diagram | `alexmorari7`, with UI/UX review by `devinethang` |
 | GitHub repository and Project board | Team, coordinated by `devinethang` |
-| Initial testing and acceptance criteria | `MM-109` |
 
 ### Week 2: Navigation and Core Screens (Sprint 1)
 
 **Planned Work**
 
-- Implement the Home screen and navigation structure.
-- Build the Explore screen with Play and Watch categories.
-- Create the Event Details screen.
-- Add the My Events screen layout.
+- Implement the Home (Discover) screen and navigation structure.
+- Build the My Games screen for games created or joined by the user.
+- Create the Game Detail screen using a dynamic Expo Router route.
+- Build the Create Game screen structure.
 - Establish reusable UI components and consistent styling.
 - Test navigation, screen rendering, and interactions.
 
@@ -123,19 +124,19 @@ To make it easier for people to connect through sports, whether they want to pla
 | Deliverable | Owner |
 |---|---|
 | Functional navigation structure | `jordangatewood28` |
-| Home and Explore screens | `jordangatewood28` |
-| Event Details and My Events screen structures | `jordangatewood28` |
+| Home and My Games screens | `jordangatewood28` |
+| Game Detail and Create Game screen structures | `jordangatewood28` |
 | Wireframe consistency review | `devinethang` |
 | Navigation and component testing | `MM-109` |
 
-### Week 3: Event Creation and Remote Data (Sprint 2)
+### Week 3: Game Creation and Remote Data (Sprint 2)
 
 **Planned Work**
 
 - Set up the Supabase database.
-- Define event and participation data structures.
-- Implement the Create Event form with validation.
-- Connect event listings and details to remote data.
+- Define game and participation data structures.
+- Implement validation and submission functionality for the Create Game form.
+- Connect game listings and details to remote data.
 - Integrate TanStack Query for fetching and caching.
 - Test form validation, loading, and error states.
 
@@ -144,28 +145,28 @@ To make it easier for people to connect through sports, whether they want to pla
 | Deliverable | Owner |
 |---|---|
 | Supabase schema and API integration | `alexmorari7` |
-| Create Event form | `jordangatewood28` |
-| Remote event retrieval | `alexmorari7` and `jordangatewood28` |
+| Functional Create Game form | `jordangatewood28` |
+| Remote game retrieval | `alexmorari7` and `jordangatewood28` |
 | Form and data integration tests | `MM-109` |
 
-### Week 4: Participation and Invitations (Sprint 3)
+### Week 4: Game Participation (Sprint 3)
 
 **Planned Work**
 
-- Implement joining and leaving events.
-- Make sure events a user joins automatically appear in their My Events screen.
-- Develop basic invitation functionality if feasible.
+- Implement joining and leaving games.
+- Make sure games a user joins automatically appear in their My Games screen.
+- Connect My Games to participation and game creation records.
 - Add local persistence for selected preferences.
-- Test event participation and navigation across screens.
+- Test game participation and navigation across screens.
 - Review progress and adjust scope where necessary.
 
 **Deliverables**
 
 | Deliverable | Owner |
 |---|---|
-| Event participation functionality | `alexmorari7` |
-| My Events integration | `jordangatewood28` |
-| Basic invitation feature, if approved | `alexmorari7` and `jordangatewood28` |
+| Game participation functionality | `alexmorari7` |
+| My Games integration | `jordangatewood28` |
+| Local persistence integration | `alexmorari7` and `jordangatewood28` |
 | Integration and regression tests | `MM-109` |
 | Sprint review and scope adjustments | `devinethang` |
 
@@ -174,11 +175,11 @@ To make it easier for people to connect through sports, whether they want to pla
 **Planned Work**
 
 - Integrate remaining frontend and backend features.
-- Complete approved invitation functionality.
+- Complete game creation and participation functionality.
 - Implement the selected advanced feature.
 - Resolve integration issues.
 - Review accessibility and visual consistency.
-- Test complete user journeys for Play and Watch events.
+- Test complete user journeys for discovering, creating, and joining games.
 
 **Deliverables**
 
@@ -216,9 +217,9 @@ To make it easier for people to connect through sports, whether they want to pla
 | Success Criterion | Measurement | Primary Owner |
 |---|---|---|
 | Navigation works correctly | Users can navigate between all required screens without errors | `jordangatewood28` |
-| Both event types are supported | Users can discover and create Play and Watch events | `jordangatewood28` and `alexmorari7` |
-| Event creation works | Valid submissions are saved; invalid submissions display errors | `jordangatewood28` and `alexmorari7` |
-| Event participation works | Joining or leaving an event updates participation records | `alexmorari7` |
+| Game discovery works | Users can browse available recreational sports games and open their details | `jordangatewood28` and `alexmorari7` |
+| Game creation works | Valid submissions are saved; invalid submissions display errors | `jordangatewood28` and `alexmorari7` |
+| Game participation works | Joining or leaving a game updates participation records and My Games | `alexmorari7` |
 | Application quality | Automated tests and required quality checks pass | `MM-109` |
 | User experience | Screens follow agreed wireframes and provide clear feedback | `devinethang` |
 
@@ -252,10 +253,9 @@ The following is a proposed initial data model. `alexmorari7` will review and fi
 
 | Table or API Resource | Fields | Screens That Use It |
 |---|---|---|
-| Events | `id`, `title`, `sport`, `event_type`, `description`, `location`, `event_date`, `capacity`, `created_by` | Home, Explore, Event Details, Create Event |
-| Profiles | `id`, `display_name` | Event Details, My Events, Invitations |
-| Participants | `id`, `event_id`, `user_id`, `status` | Event Details, My Events |
-| Invitations | `id`, `event_id`, `sender_id`, `recipient_id`, `status` | Offers/Invites, Event Details |
+| Games | `id`, `title`, `sport`, `description`, `location`, `game_date`, `capacity`, `created_by` | Home (Discover), My Games, Game Detail, Create Game |
+| Profiles | `id`, `display_name` | Game Detail, My Games |
+| Participants | `id`, `game_id`, `user_id`, `status` | Game Detail, My Games |
 
 ---
 
@@ -320,7 +320,7 @@ Microsoft Teams is the team's agreed communication platform for meetings, progre
 
 - Design and maintain the Supabase database.
 - Implement data retrieval and modification operations.
-- Support event participation and invitation logic.
+- Support game participation logic.
 - Manage backend integration and data integrity.
 
 ### QA / Tester: `MM-109`
@@ -353,9 +353,9 @@ Each member will also provide secondary support through code reviews, testing, d
 
 **Commit Message Examples**
 
-- `feat: add explore screen`
-- `fix: correct event form validation`
-- `docs: add software development plan`
+- `feat: add home discover screen`
+- `fix: correct game form validation`
+- `docs: update software development plan`
 - `test: add navigation tests`
 
 ### Quality Checks
