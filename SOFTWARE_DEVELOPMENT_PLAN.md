@@ -102,8 +102,8 @@ To make it easier for people to connect through sports, whether they want to pla
 
 | Deliverable | Owner |
 |---|---|
-| Software Development Plan | Team, coordinated by `devinethang` |
-| Wireframes and user-flow diagram | `devinethang`, with team feedback |
+| Software Development Plan | `MM-109`, with team input |
+| Wireframes and user-flow diagram | `alexmorari7`, with team feedback |
 | GitHub repository and Project board | Team, coordinated by `devinethang` |
 | Initial testing and acceptance criteria | `MM-109` |
 
