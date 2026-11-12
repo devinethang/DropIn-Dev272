@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useRouter } from "expo-router";
+import { styles } from '@/components/universal2'
 
 export default function Index() {
   const router = useRouter();
@@ -24,56 +25,3 @@ export default function Index() {
 //     </View>
 //   )
 // }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    flex: 1,
-    padding: 16,
-    gap: 12,
-  },
-  title: {
-    fontSize: 45,
-    fontWeight: "700",
-    textAlign: "left",
-  },
-  body: {
-    fontSize: 16,
-    textAlign: "center",
-  },
-  hint: {
-    marginTop: 24,
-    fontSize: 12,
-    color: "#6b7280",
-    textAlign: "center",
-  },
-  button: {
-    backgroundColor: "black",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 6,
-    alignSelf: "flex-start",
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 30,
-    fontWeight: "600",
-  },
-  card: {
-    padding: 16,
-    borderRadius: 8,
-    backgroundColor: "#f3f4f6",
-  },
-  cardMain: {
-    gap: 4,
-  },
-  cardTitle: {
-    fontSize: 18,
-    fontWeight: "600",
-  },
-  cardSub: {
-    fontSize: 14,
-    color: "#6b7280",
-  },
-});
