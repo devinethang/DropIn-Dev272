@@ -175,4 +175,21 @@ export const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "600",
   },
+
+    card: {
+    padding: 16,
+    borderRadius: 8,
+    backgroundColor: "#f3f4f6",
+  },
+  cardMain: {
+    gap: 4,
+  },
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  cardSub: {
+    fontSize: 14,
+    color: "#6b7280",
+  },
 });
