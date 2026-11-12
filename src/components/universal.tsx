@@ -176,7 +176,7 @@ export const styles = StyleSheet.create({
     fontWeight: "600",
   },
 
-    card: {
+  card: {
     padding: 16,
     borderRadius: 8,
     backgroundColor: "#f3f4f6",
