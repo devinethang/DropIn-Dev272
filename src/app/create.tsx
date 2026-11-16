@@ -7,7 +7,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>New Game</Text>
-      <Pressable style={styles.button} onPress={() => console.log('pressed!')}>
+      <Pressable style={styles.button} onPress={() => console.log("pressed!")}>
         <Text style={styles.buttonText}>Post Game</Text>
       </Pressable>
     </View>
@@ -41,9 +41,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 6,
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   buttonText: {
     color: "#fff",

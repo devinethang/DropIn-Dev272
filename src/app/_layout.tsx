@@ -4,7 +4,7 @@ import { Stack } from "expo-router";
 // Week 3 replaces this with Stack + Tabs layouts.
 export default function RootLayout() {
   return (
-    <Stack 
+    <Stack
       screenOptions={{
         headerShown: false,
       }}

@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
-{/* 
+{
+  /* 
   Improve styling so the inputs are easier to read and tap into.
   Everything is has the same background color so the contrast is blended.
 
@@ -8,7 +9,8 @@ import { StyleSheet } from "react-native";
   
   Move styling into here so a stylesheet isn't needed at the bottom of each page and easier to update every page
 
-*/}
+*/
+}
 
 // Default colors
 export const colors = {
@@ -17,52 +19,46 @@ export const colors = {
   error: "#b91c1c",
   surface: "#c9d3e7",
   text: "#111827",
-  primary: "#9cadd8"
-  
+  primary: "#9cadd8",
 };
 
-
-
 export const styles = StyleSheet.create({
-
   main: {
     backgroundColor: colors.bg,
   },
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
     padding: 24,
     gap: 12,
   },
   title: {
-    fontSize: 20,
-    fontWeight: "600",
-    textAlign: "center",
+    fontSize: 45,
+    fontWeight: "700",
+    textAlign: "left",
   },
-  list: { 
+  list: {
     padding: 16,
-    gap: 0
+    gap: 0,
   },
   row: {
     padding: 12,
     backgroundColor: colors.bg,
-    flexDirection: 'column',
+    flexDirection: "column",
     borderWidth: 1,
     borderRightWidth: 0,
     borderLeftWidth: 0,
     borderBottomWidth: 0,
     borderRadius: 8,
-    gap: 2
+    gap: 2,
   },
   rowTitle: {
-    fontWeight: "600" 
+    fontWeight: "600",
   },
   searchBar: {
-    flexDirection: 'row',
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap:10,
+    gap: 10,
     backgroundColor: colors.bg,
     borderRadius: 8,
   },
@@ -74,30 +70,30 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   editButton: {
-    textAlign: 'right',
-    flexDirection: 'row',
+    textAlign: "right",
+    flexDirection: "row",
     alignItems: "center",
     backgroundColor: colors.primary,
     borderRadius: 8,
-    padding: 6
+    padding: 6,
   },
   alarmInfo: {
     justifyContent: "space-between",
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   newAlarm: {
-    flexDirection: 'row',
+    flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap:10,
+    gap: 10,
     backgroundColor: colors.bg,
     borderRadius: 8,
-    padding: 5
+    padding: 5,
   },
   item: {
     fontSize: 30,
-    textAlign: 'center',
-    padding: 5
+    textAlign: "center",
+    padding: 5,
   },
   timeOfDay: {
     width: 130,
@@ -128,16 +124,16 @@ export const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 16,
     gap: 16,
-    backgroundColor: colors.bg
+    backgroundColor: colors.bg,
   },
   timeInput: { flex: 1 },
 
-  fieldRow: { 
+  fieldRow: {
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
     fontSize: 22,
-    color: colors.text
+    color: colors.text,
   },
 
   dataDisplay: {
@@ -148,28 +144,33 @@ export const styles = StyleSheet.create({
   },
 
   alarmData: {
-    fontWeight: "600"
+    fontWeight: "600",
   },
 
-  center: { 
+  center: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    gap: 8
+    gap: 8,
   },
 
   link: {
-    color: ''
+    color: "",
   },
 
   button: {
     backgroundColor: "black",
+    position: "absolute",
+    top: 10,
+    right: 16,
+    elevation: 3,
+    zIndex: 1,
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 6,
     alignSelf: "flex-start",
   },
-  
+
   buttonText: {
     color: "#fff",
     fontSize: 30,
@@ -191,5 +192,48 @@ export const styles = StyleSheet.create({
   cardSub: {
     fontSize: 14,
     color: "#6b7280",
+  },
+
+  listButton: {
+    display: "flex",
+    justifyContent: "center",
+    padding: 16,
+    marginVertical: 6,
+    backgroundColor: "#f2f2f2",
+    borderRadius: 8,
+  },
+
+  LoginButton: {
+    height: 50,
+    backgroundColor: "black",
+    borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 8,
+  },
+
+  LoginInput: {
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    paddingHorizontal: 14,
+    marginBottom: 16,
+    fontSize: 16,
+  },
+
+  WelcomeTitle: {
+    fontSize: 28,
+    fontWeight: "bold",
+    marginBottom: 24,
+    textAlign: "center",
+    color: "#111",
+  },
+
+  WelcomeContainer: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 24,
+    backgroundColor: "#fff",
   },
 });
