@@ -1,6 +1,6 @@
 # The Drop In App
 # Description
-Drop In is an app for everyone to get information about local sporting events in their community. It's a place that helps people join in, play, and watch sports with their local community members. Users can can create, view, and join local sports events at the press of a button.  
+Drop In is an app for everyone to get information about local sporting events in their community. It's a place that helps people join in and play sports with their local community members. Users can can create, view, and join local sports events at the press of a button.  
 
 # Drop In - Roles
 devinethang (Devin) - Project Manager, UI/UX Designer, and DevOps
