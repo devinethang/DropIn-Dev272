@@ -1,5 +1,5 @@
-import { DATA } from "@/app/(tabs)/index";
 import { styles } from "@/components/universal";
+import { DATA } from "@/data/games";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
