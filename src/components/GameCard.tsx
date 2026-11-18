@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     gap: 8,
   },
-  title: { flexShrink: 1, fontSize: 16, fontWeight: "600", color: colors.text },
+  title: { flexShrink: 1, fontSize: 16, fontWeight: "700", color: colors.text },
   count: { fontSize: 13, color: colors.muted },
   countStrong: { fontWeight: "600", color: colors.text },
   textFull: { color: colors.muted },
