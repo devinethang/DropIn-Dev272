@@ -21,7 +21,11 @@ Main and development require a pull request before merge with at least 1 approva
 
 # Commit Message Style
 Make descriptive commit messages, say what's changed in the new update without going into unnessary details 
-For example: Added new login page, fixed header styling issues for home page, switched storage system to Supabase 
+For example: 
+- `feat: add explore screen`
+- `fix: correct event form validation`
+- `docs: update software development plan`
+- `test: add navigation tests`
 
 ### Scripts
 
