@@ -65,7 +65,7 @@
 | ----- | ----------------------------------------------- | ------------------------------------ | ---------------- | ------------------- |
 | #18   | Error from improperly capitalised text elements | minor                                | jordangatewood28 | Fixed in #34        |
 | # 43… | Moved data from index to data/games             | minor                                | devinethang      | Status Fixed in #44 |
-| #42 | My Games header overlaps status bar | alexmorari7 | Fixed in PR #46 |
+| #42 | My Games header overlaps status bar | alexmorari7 | minor | Fixed in PR #46 |
 
 
 
