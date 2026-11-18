@@ -1,4 +1,5 @@
 import { colors, styles } from "@/components/universal";
+import { DATA, gameList } from "@/data/games";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -9,7 +10,6 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { DATA, gameList } from "./index";
 
 const sports = [
   "All",
