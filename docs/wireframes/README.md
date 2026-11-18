@@ -10,6 +10,7 @@ File | Screen | Route (Expo Router) | Navigation |
 ["home.png"](./home.png) | Home (Discover) | "src/app/(tabs)/index.tsx" | Tab 1 |
 ["my-games.png"](./my-games.png) | My games (Joined / Hosting) | "src/app/(tabs)/my-games.tsx" | Tab 2 |
 ["game-detail.png"](./game-detail.png) | Game detail | "src/app/game/[id].tsx" | Pushed · dynamic route |
+[game-detail-joined.png](./game-detail-joined.png) | Game detail (hosting or joined: Invite player)	src/app/game/[id].tsx	| Pushed · dynamic route.
 ["create-game.png"](./create-game.png) | Create game | "src/app/create.tsx" | Pushed |
 ["user-flow.png"](./user-flow.png) | User-flow diagram 
 
@@ -24,6 +25,8 @@ User flow
     Tabs: Home (Discover) and My games.
     Pushed: Game detail (from a game card on either tab) and Create game (from "New game" on Home).
     Dynamic route: "game/[id]", where "id" is the game's ID.
+    Game detail has two versions: if you're not in the game yet, you see Join game; once you're hosting or have joined it, you see Invite player instead.
+    Invites: invite a player to any game you're hosting or have joined; accept or decline invites you receive. Accepting adds the game to My games › Joined.
     After Post, Create game replaces itself with the new game's detail screen.
     Sign out (My games header) returns to Sign in. The root layout redirects signed-out users to Sign in.
 
