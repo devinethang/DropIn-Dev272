@@ -1,3 +1,4 @@
+
 # Software Development Plan
 
 **Project:** Drop In  
@@ -9,30 +10,29 @@
 
 ## 1. Project Overview
 
-This project aims to develop a mobile application that connects people through recreational sports by helping them discover, organize, and participate in local sporting games.
+This project aims to develop a mobile application that connects people through sports by helping them discover, organize, and participate in local recreational sports games.
 
-The app will focus on recreational sports participation. Users can discover games in their community, create their own games, view game details, and join activities organized by other users.
-
-Users will be able to browse available games, view upcoming games they have created or joined, and manage their participation. The application will provide a straightforward experience for people who want to connect with others through sports.
+Users will be able to explore available games, view game details, create games, and join or leave activities. The app will also support email invitations for friends and family and real-time in-app messaging between players.
 
 ### Problem
 
-People may have difficulty finding others to play recreational sports with, especially when they do not have enough players to organize a game.
+People may have difficulty finding others to play recreational sports or organizing games with enough participants.
 
 ### Target Users
 
 - **Recreational Player:** A college student who enjoys playing volleyball but struggles to find enough people to organize a game.
-- **Community Sports Enthusiast:** Someone who enjoys recreational basketball, soccer, or other sports and wants to discover local games and connect with other players.
+- **Game Organizer:** Someone who wants to organize recreational sports games and invite friends, family, or other players to participate.
 
 ### Purpose
 
-To make it easier for people to connect through recreational sports by discovering, organizing, and joining local games.
+To make it easier for people to connect through recreational sports by discovering, organizing, and participating in local games.
 
 ### Objectives
 
-- Develop a functional mobile application that supports recreational sports participation.
-- Allow users to discover, create, and join local sporting games.
+- Develop a functional mobile application for recreational sports.
+- Allow users to discover, create, join, and leave games.
 - Provide an accessible and straightforward navigation experience.
+- Support email invitations and real-time communication between players.
 - Store game information remotely and maintain relevant user preferences locally.
 - Validate the application's functionality through testing and quality assurance.
 - Demonstrate effective collaboration, version control, and project management.
@@ -50,11 +50,13 @@ To make it easier for people to connect through recreational sports by discoveri
 
 ### Core Application Features
 
-1. **Home (Discover):** Browse available recreational sports games and access game details.
-2. **Create Game:** Organize a recreational sports game by entering the required information.
-3. **Game Detail:** View game information, including sport, date, time, location, and description.
-4. **Game Participation:** Join or leave available games.
-5. **My Games:** View upcoming games created or joined by the user.
+1. **Explore Games:** Browse available recreational sports games and search for activities.
+2. **Create Game:** Organize recreational sports games with relevant details.
+3. **Game Participation:** View game information and join or leave games.
+4. **Sign In:** Allow users to authenticate and access their accounts.
+5. **Email Invitations:** Invite friends and family to participate in games using email addresses.
+6. **My Games:** View games created or joined by the user.
+7. **Real-Time Messaging:** Allow players to communicate through in-app messages.
 
 ---
 
@@ -62,26 +64,27 @@ To make it easier for people to connect through recreational sports by discoveri
 
 ### In Scope
 
-- Home (Discover) screen displaying available recreational sports games.
-- My Games screen for games created or joined by the user.
-- Game Detail screen with sport, date, time, location, and description.
+- Home screen with search, upcoming games, and navigation to Explore and Invites.
+- Game discovery for recreational sports.
+- Game details including sport, date, time, location, and description.
 - Create Game form with validation.
-- Join and leave game functionality.
+- User authentication.
+- Join and Leave Game functionality.
+- My Games screen.
+- Email invitations for friends and family.
+- Real-time in-app messaging.
 - Remote game storage and data retrieval.
 - Local persistence for selected user preferences.
-- Navigation using the approved Expo Router structure.
-- Loading states, error handling, accessibility, and testing.
-- Consistent UI components based on the approved wireframes.
+- Navigation, loading states, error handling, and testing.
 
 ### Out of Scope
 
-- Sports watch parties and spectator event discovery.
+- Sports watch parties.
 - Live sports scores and match statistics.
 - Ticket purchasing and payment processing.
-- Real-time messaging and video calls.
-- Advanced social networking features.
+- Video calls.
+- Advanced social networking features beyond planned messaging and invitations.
 - Complex tournament management.
-- Friend and family invitation functionality.
 
 ---
 
@@ -98,96 +101,130 @@ To make it easier for people to connect through recreational sports by discoveri
 - Set up the GitHub repository and Project board.
 - Configure branches, collaborators, and code-quality tooling.
 - Identify required libraries and data structures.
+- Review planning deliverables and verify that initial acceptance criteria are defined.
 
 **Deliverables**
 
 | Deliverable | Owner |
 |---|---|
-| Software Development Plan | `MM-109`, with team feedback |
-| Wireframes and user-flow diagram | `alexmorari7`, with UI/UX review by `devinethang` |
+| Software Development Plan | `MM-109` |
+| Wireframes and user-flow diagram | `alexmorari7`, with team feedback |
 | GitHub repository and Project board | Team, coordinated by `devinethang` |
+| Initial testing requirements and acceptance criteria | `MM-109` |
+| Sprint 0 QA and planning review | `MM-109` |
 
 ### Week 2: Navigation and Core Screens (Sprint 1)
 
 **Planned Work**
 
-- Implement the Home (Discover) screen and navigation structure.
-- Build the My Games screen for games created or joined by the user.
-- Create the Game Detail screen using a dynamic Expo Router route.
-- Build the Create Game screen structure.
+- Implement the Home screen and navigation structure.
+- Build the Explore screen with game discovery and search.
+- Create the Game Details screen.
+- Add the My Games and Invites screen structures.
+- Create the Create Game screen structure.
 - Establish reusable UI components and consistent styling.
-- Test navigation, screen rendering, and interactions.
+- Test navigation, screen rendering, form validation, and interactions.
+- Document bugs and verify fixes.
 
 **Deliverables**
 
 | Deliverable | Owner |
 |---|---|
-| Functional navigation structure | `jordangatewood28` |
-| Home (Discover) and My Games screens | `jordangatewood28` |
-| Game Detail and Create Game screen structures | `jordangatewood28` |
-| Wireframe consistency review | `devinethang` |
-| Navigation and component testing | `MM-109` |
+| Functional Expo Router navigation structure | `MM-109`, `jordangatewood28` |
+| Home (Discover) and Explore screens | `MM-109`, `jordangatewood28` |
+| Game Details and Create Game screen structures | `MM-109` |
+| My Games screen structure | `alexmorari7` |
+| Invites screen structure | `MM-109` |
+| Reusable UI components and consistent styling | `MM-109` |
+| Reusable UI components and consistent styling | `jordangatewood28` |
+| Responsive layouts and accessibility for core screens | `devinethang`, `jordangatewood28` |
+| Wireframe consistency review | `devinethang`, `alexmorari7` |
+| Sprint 1 QA: Navigation and core screen functionality | `MM-109`, `devinethang` |
 
-### Week 3: Game Creation and Remote Data (Sprint 2)
+### Week 3: Authentication and Game Management (Sprint 2)
 
 **Planned Work**
 
-- Set up the Supabase database.
-- Define game and participation data structures.
-- Implement validation and submission functionality for the Create Game form.
-- Connect game listings and details to remote data.
-- Integrate TanStack Query for fetching and caching.
-- Test form validation, loading, and error states.
+- Configure Supabase integration and define game data structures.
+- Implement functional user sign-in and authentication.
+- Connect Create Game to Supabase for saving newly created games.
+- Implement remote game retrieval using TanStack Query.
+- Implement Join and Leave Game functionality.
+- Update participation records and display participation status.
+- Establish the initial data files and supporting structure for real-time messaging.
+- Establish the initial data files and supporting structure for email invitations.
+- Test authentication, game creation, participation, and remote data integration.
+- Document bugs and verify fixes.
 
 **Deliverables**
 
 | Deliverable | Owner |
 |---|---|
-| Supabase schema and API integration | `alexmorari7` |
-| Functional Create Game form | `jordangatewood28` |
-| Remote game retrieval | `alexmorari7` and `jordangatewood28` |
-| Form and data integration tests | `MM-109` |
+| Supabase event data integration | To be assigned |
+| User sign-in and authentication | To be assigned |
+| Create Game and Supabase integration | To be assigned |
+| Join and Leave Game functionality | To be assigned |
+| Initial real-time messaging structure | `devinethang` |
+| Initial email invitation structure | `MM-109` |
+| Sprint 2 QA: Authentication and game management functionality | `MM-109`, `jordangatewood28` |
 
-### Week 4: Game Participation (Sprint 3)
+**Sprint Goal**
+
+Implement functional authentication, remote game creation and retrieval, and game participation while preparing the supporting structures for future messaging and email invitations.
+
+**Due Date:** November 24, 2026
+
+### Week 4: Messaging and Invitations (Sprint 3)
 
 **Planned Work**
 
-- Implement joining and leaving games.
-- Make sure games a user joins automatically appear in their My Games screen.
-- Connect My Games to participation and game creation records.
-- Add local persistence for selected preferences.
-- Test game participation and navigation across screens.
-- Review progress and adjust scope where necessary.
+- Build upon the messaging structure established during Sprint 2.
+- Implement real-time in-app messaging using Supabase.
+- Develop the messaging interface and connect it to backend data.
+- Build upon the email invitation structure established during Sprint 2.
+- Implement email invitations for friends and family.
+- Connect invitations to games and recipient email addresses.
+- Handle invitation responses and relevant status updates.
+- Test messaging, invitations, and navigation between related screens.
+- Document bugs and verify fixes.
 
 **Deliverables**
 
 | Deliverable | Owner |
 |---|---|
-| Game participation functionality | `alexmorari7` |
-| My Games integration | `jordangatewood28` |
-| Local persistence integration | `alexmorari7` and `jordangatewood28` |
-| Integration and regression tests | `MM-109` |
+| Real-time messaging functionality | Backend and frontend team |
+| Messaging interface and integration | Backend and frontend team |
+| Email invitation functionality | `MM-109` |
+| Invitation status and game integration | To be assigned |
+| Sprint 3 QA: Messaging and invitation functionality | `MM-109`, `jordangatewood28` |
 | Sprint review and scope adjustments | `devinethang` |
+
+**Sprint Goal**
+
+Develop functional real-time messaging and email invitations using the foundations established in Sprint 2.
 
 ### Week 5: Integration and Feature Completion (Sprint 4)
 
 **Planned Work**
 
 - Integrate remaining frontend and backend features.
-- Complete game creation and participation functionality.
-- Implement the selected advanced feature.
+- Complete unfinished messaging and invitation functionality.
+- Complete the selected advanced feature.
 - Resolve integration issues.
 - Review accessibility and visual consistency.
-- Test complete user journeys for discovering, creating, and joining games.
+- Test complete user journeys, including authentication, game creation, participation, messaging, and invitations.
+- Conduct regression testing to ensure existing features continue working after integration.
+- Document bugs and verify fixes.
 
 **Deliverables**
 
 | Deliverable | Owner |
 |---|---|
-| Integrated application | `jordangatewood28` and `alexmorari7` |
+| Integrated application | Team |
+| Remaining feature completion | Assigned during sprint planning |
 | Advanced feature | Assigned during sprint planning |
-| UI/UX refinements | `devinethang` and `jordangatewood28` |
-| Functional and regression testing | `MM-109` |
+| UI/UX refinements | `devinethang`, `alexmorari7`, `jordangatewood28`, `MM-109` |
+| Sprint 4 QA: Integrated application and regression testing | `MM-109`, `jordangatewood28` |
 
 ### Week 6: Polish and Presentation
 
@@ -197,6 +234,7 @@ To make it easier for people to connect through recreational sports by discoveri
 - Improve usability and accessibility.
 - Verify all required functionality.
 - Run linting, formatting, TypeScript checks, and automated tests.
+- Complete final regression testing.
 - Complete project documentation.
 - Prepare and rehearse the final demonstration.
 
@@ -205,7 +243,8 @@ To make it easier for people to connect through recreational sports by discoveri
 | Deliverable | Owner |
 |---|---|
 | Functional proof-of-concept application | Team |
-| Final testing report | `MM-109` |
+| Final QA: Application testing and quality checks | `MM-109`, `jordangatewood28` |
+| Final testing report | `MM-109`, `jordangatewood28` |
 | Updated README and documentation | Team |
 | Final presentation and demonstration | Team |
 
@@ -215,14 +254,18 @@ To make it easier for people to connect through recreational sports by discoveri
 
 | Success Criterion | Measurement | Primary Owner |
 |---|---|---|
-| Navigation works correctly | Users can navigate between all required screens without errors | `jordangatewood28` |
-| Game discovery works | Users can browse available recreational sports games and open their details | `jordangatewood28` and `alexmorari7` |
-| Game creation works | Valid submissions are saved; invalid submissions display errors | `jordangatewood28` and `alexmorari7` |
-| Game participation works | Joining or leaving a game updates participation records and My Games | `alexmorari7` |
-| Application quality | Automated tests and required quality checks pass | `MM-109` |
-| User experience | Screens follow agreed wireframes and provide clear feedback | `devinethang` |
+| Navigation works correctly | Users can navigate between all required screens without errors | `MM-109`, `jordangatewood28` |
+| User authentication works | Users can sign in and maintain authenticated sessions | Assigned during sprint planning |
+| Game creation works | Valid submissions are saved to Supabase; invalid submissions display errors | Frontend and backend team |
+| Game data integration works | Games are retrieved from Supabase and displayed correctly | Frontend and backend team |
+| Game participation works | Joining or leaving a game updates participation records | Assigned during sprint planning |
+| Email invitations work | Users can invite friends and family through email and respond to invitations | `MM-109` |
+| Real-time messaging works | Players can exchange messages with updates appearing in real time | Backend and frontend team |
+| Application quality | Automated tests and required quality checks pass | `MM-109`, `jordangatewood28` |
+| Sprint QA coverage | Each sprint includes a dedicated QA issue, documented results, and verification of completed functionality | `MM-109`, `jordangatewood28` |
+| User experience | Screens follow agreed wireframes and provide clear feedback | `devinethang`, `alexmorari7` |
 
-QA testing and UI consistency will take place throughout development rather than only during the final sprint.
+QA testing and UI consistency will take place throughout development rather than only during the final sprint. Each sprint will include a dedicated QA issue to verify completed features, document bugs, and retest fixes. Features that remain incomplete will be documented and carried forward rather than marked as successfully tested.
 
 ---
 
@@ -233,7 +276,7 @@ QA testing and UI consistency will take place throughout development rather than
 | React Native / Expo | Mobile application development |
 | TypeScript | Type-safe application code |
 | Expo Router | Screen navigation, tabs, stack navigation, and dynamic routes |
-| Supabase | Remote database and backend services |
+| Supabase | Remote database, authentication, backend services, and real-time messaging |
 | TanStack Query | Remote data fetching, caching, and synchronization |
 | AsyncStorage | Local persistence |
 | React Hook Form and Zod | Form management and validation |
@@ -243,18 +286,23 @@ QA testing and UI consistency will take place throughout development rather than
 | GitHub Projects | Task management and sprint tracking |
 | GitHub Pull Requests | Code review and controlled merging |
 | Microsoft Teams | Team communication, meetings, and progress updates |
+| Email delivery service | Sending game invitations to recipient email addresses |
 
 ---
 
 ## 6. Data
 
-The following is a proposed initial data model. `alexmorari7` will review and finalize the schema with the team.
+The following is a proposed initial data model. The team will review and finalize the schema during implementation.
 
 | Table or API Resource | Fields | Screens That Use It |
 |---|---|---|
-| Games | `id`, `title`, `sport`, `description`, `location`, `game_date`, `capacity`, `created_by` | Home (Discover), My Games, Game Detail, Create Game |
-| Profiles | `id`, `display_name` | Game Detail, My Games |
-| Participants | `id`, `game_id`, `user_id`, `status` | Game Detail, My Games |
+| Games | `id`, `title`, `sport`, `description`, `location`, `game_date`, `capacity`, `created_by` | Home, Explore, Game Details, Create Game |
+| Profiles | `id`, `display_name`, `email` | Sign In, Game Details, My Games, Invites |
+| Participants | `id`, `game_id`, `user_id`, `status` | Game Details, My Games |
+| Invitations | `id`, `game_id`, `sender_id`, `recipient_email`, `status` | Invites, Game Details |
+| Messages | `id`, `sender_id`, `recipient_id`, `content`, `created_at` | Messaging |
+
+The messaging and invitation data structures will begin development in Sprint 2 and be expanded during Sprint 3.
 
 ---
 
@@ -282,9 +330,13 @@ The Project board will use the following columns:
 4. In Review
 5. Done
 
+Each sprint will include a dedicated QA issue. Testing will focus on the functionality delivered during that sprint, including validation, navigation, error handling, and regression testing where applicable.
+
 ### Definition of Done
 
 A task is considered complete when its acceptance criteria are met, required checks pass, the functionality has been tested, and the pull request has received the required review and has been merged.
+
+QA issues are complete when the planned tests have been performed, results are documented, identified bugs are reported, and available fixes have been retested. Unresolved defects and incomplete features will be tracked for follow-up.
 
 ### Communication Tools
 
@@ -303,38 +355,64 @@ Microsoft Teams is the team's agreed communication platform for meetings, progre
 - Create and refine wireframes and user flows.
 - Review UI consistency and user experience.
 - Help ensure the project remains within scope.
+- Support real-time messaging development.
 
-### Frontend Developer: `jordangatewood28`
+### Frontend Developer and Secondary QA: `jordangatewood28`
 
-**Primary Responsibilities**
+**Primary Responsibilities: Frontend Development**
 
 - Implement screens, navigation, and reusable UI components.
 - Develop user-facing forms and interactions.
 - Connect frontend components to backend services.
 - Address frontend bugs and usability issues.
 
-### Backend Developer: `alexmorari7`
+**Secondary Responsibilities: Quality Assurance**
 
-**Primary Responsibilities**
+- Test assigned screens and user interactions.
+- Identify and document bugs.
+- Support automated and manual testing.
+- Review changes for regressions.
+- Assist with sprint QA, integration, and final testing.
+
+### Backend Developer and Secondary UI/UX Designer: `alexmorari7`
+
+**Primary Responsibilities: Backend Development**
 
 - Design and maintain the Supabase database.
 - Implement data retrieval and modification operations.
-- Support game participation logic.
+- Support game participation, invitation, and messaging logic.
 - Manage backend integration and data integrity.
 
-### QA / Tester: `MM-109`
+**Secondary Responsibilities: UI/UX Design**
 
-**Primary Responsibilities**
+- Create and refine application wireframes.
+- Support screen layouts and user-flow design.
+- Review visual consistency across screens.
+- Collaborate with frontend developers to align implementation with approved wireframes.
+- Identify usability improvements and accessibility concerns.
+
+### QA / Tester and Secondary Frontend Developer: `MM-109`
+
+**Primary Responsibilities: QA and Testing**
 
 - Define test cases and acceptance criteria.
+- Coordinate dedicated QA testing for each sprint.
 - Test screens, navigation, forms, and user interactions.
 - Identify, document, and reproduce bugs.
-- Fix assigned issues when appropriate.
 - Run automated tests and quality checks.
 - Review changes for regressions throughout development.
 - Coordinate final regression testing before submission.
 
-Each member will also provide secondary support through code reviews, testing, documentation, or troubleshooting as agreed by the team.
+**Secondary Responsibilities: Frontend Development**
+
+- Develop assigned frontend screens and navigation.
+- Build reusable UI components and maintain consistent styling.
+- Implement frontend interactions and screen layouts.
+- Support frontend integration and resolve assigned issues.
+- Develop assigned email invitation functionality.
+- Collaborate with the team on frontend development and code reviews.
+
+Each member will also provide additional support through code reviews, testing, documentation, or troubleshooting as agreed by the team.
 
 ---
 
@@ -342,18 +420,18 @@ Each member will also provide secondary support through code reviews, testing, d
 
 | Item | Policy |
 |---|---|
-| Main Branch | Stable releases |
+| Main Branch | Stable releases, updated from `develop` at the end of each sprint |
 | Develop Branch | Ongoing development and the repository's default branch |
-| Feature Branches | Separate branches for assigned tasks, created from `develop` |
-| Pull Requests | All changes are submitted through pull requests and reviewed by at least one teammate who did not author the changes |
+| Feature Branches | Separate branches for assigned issues, created from `develop` |
+| Pull Requests | All changes are submitted through pull requests targeting `develop` and reviewed by at least one teammate who did not author the changes |
 | Branch Protection | Both `main` and `develop` require pull requests and at least one approving review; direct pushes and bypassing are not allowed |
 | Merge Policy | Use merge commits to preserve individual commit histories |
 | Commit Message Style | Short, descriptive messages identifying the change |
 
 **Commit Message Examples**
 
-- `feat: add home discover screen`
-- `fix: correct game form validation`
+- `feat: add explore screen`
+- `fix: correct event form validation`
 - `docs: update software development plan`
 - `test: add navigation tests`
 
