@@ -54,6 +54,10 @@ export default function Index() {
         })
       }
       style={styles.listButton}
+      // Accessibility info
+      accessibilityRole="button"
+      accessibilityLabel={`Name: ${item.name}, Sport: ${item.sport}, Date: ${item.date} at ${item.time}`}
+      accessibilityHint="Opens game details"
     >
       <View
         style={{
