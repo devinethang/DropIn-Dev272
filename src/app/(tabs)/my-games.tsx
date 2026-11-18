@@ -1,6 +1,6 @@
+import { useRouter } from "expo-router";
 import { useMemo, useState } from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-import { useRouter } from "expo-router";
 import { EmptyState } from "../../components/EmptyState";
 import { GameCard } from "../../components/GameCard";
 import {
