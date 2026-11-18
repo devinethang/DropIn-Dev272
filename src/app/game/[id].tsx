@@ -29,20 +29,33 @@ export default function GameDetails() {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
       <ScrollView contentContainerStyle={styles.form}>
-        <Text style={styles.title}>{game.name}</Text>
+        <View accessible={true} accessibilityLabel={`Name: ${game.name}`}>
+          <Text style={styles.title}>{game.name}</Text>
+        </View>
 
         <View style={styles.dataDisplay}>
-          <Text style={styles.cardTitle}>Sport</Text>
-          <Text>{game.sport}</Text>
+          <View accessible={true} accessibilityLabel={`Sport: ${game.sport}`}>
+            <Text style={styles.cardTitle}>Sport</Text>
+            <Text>{game.sport}</Text>
+          </View>
 
-          <Text style={styles.cardTitle}>Date</Text>
-          <Text>{game.date}</Text>
+          <View accessible={true} accessibilityLabel={`Date: ${game.date}`}>
+            <Text style={styles.cardTitle}>Date</Text>
+            <Text>{game.date}</Text>
+          </View>
 
-          <Text style={styles.cardTitle}>Time</Text>
-          <Text>{game.time}</Text>
+          <View accessible={true} accessibilityLabel={`Time: ${game.time}`}>
+            <Text style={styles.cardTitle}>Time</Text>
+            <Text>{game.time}</Text>
+          </View>
 
-          <Text style={styles.cardTitle}>Location</Text>
-          <Text>{game.location}</Text>
+          <View
+            accessible={true}
+            accessibilityLabel={`Location: ${game.location}`}
+          >
+            <Text style={styles.cardTitle}>Location</Text>
+            <Text>{game.location}</Text>
+          </View>
         </View>
 
         <View style={styles.dataDisplay}>
