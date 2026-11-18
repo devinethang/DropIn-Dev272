@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { formatGameDate, formatGameTime, type Game } from "../data/games";
+import { colors } from "./universal";
 
 type Props = {
   game: Game;
@@ -80,30 +81,28 @@ export function GameCard({
   );
 }
 
-const INK = "#1F1F1F";
-const MUTED = "#5E5E5E";
-
 const styles = StyleSheet.create({
   card: {
-    borderWidth: 1.5,
-    borderColor: INK,
+    borderWidth: 1,
+    borderColor: colors.border,
+    backgroundColor: colors.surface,
     borderRadius: 12,
     overflow: "hidden",
   },
-  cardFull: { borderStyle: "dashed", borderColor: "#9A9A9A" },
+  cardFull: { borderStyle: "dashed", borderColor: colors.silver },
   body: { padding: 14, gap: 4 },
-  pressed: { backgroundColor: "#F2F2F2" },
+  pressed: { backgroundColor: colors.ice },
   topRow: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     gap: 8,
   },
-  title: { flexShrink: 1, fontSize: 16, fontWeight: "600", color: INK },
-  count: { fontSize: 13, color: MUTED },
-  countStrong: { fontWeight: "600", color: INK },
-  textFull: { color: MUTED },
-  meta: { fontSize: 14, color: MUTED },
+  title: { flexShrink: 1, fontSize: 16, fontWeight: "600", color: colors.text },
+  count: { fontSize: 13, color: colors.muted },
+  countStrong: { fontWeight: "600", color: colors.text },
+  textFull: { color: colors.muted },
+  meta: { fontSize: 14, color: colors.muted },
   cancel: {
     alignSelf: "flex-start",
     minHeight: 44,
@@ -111,9 +110,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 14,
     marginBottom: 14,
     paddingHorizontal: 14,
-    borderWidth: 1.5,
-    borderColor: INK,
+    borderWidth: 1,
+    borderColor: colors.primary,
     borderRadius: 8,
   },
-  cancelText: { fontSize: 14, fontWeight: "600", color: INK },
+  cancelText: { fontSize: 14, fontWeight: "600", color: colors.primary },
 });

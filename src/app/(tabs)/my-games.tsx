@@ -1,6 +1,7 @@
+import { useRouter } from "expo-router";
 import { useMemo, useState } from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
-import { useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { EmptyState } from "../../components/EmptyState";
 import { GameCard } from "../../components/GameCard";
 import {
@@ -54,7 +55,7 @@ export default function MyGamesScreen({
     setGames((prev) => prev.filter((g) => g.id !== id));
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen} edges={["top"]}>
       <View style={styles.content}>
         <View style={styles.header}>
           <Text style={styles.title} accessibilityRole="header">
@@ -104,7 +105,7 @@ export default function MyGamesScreen({
           }
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
