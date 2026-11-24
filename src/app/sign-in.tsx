@@ -1,10 +1,11 @@
-import { styles } from "@/components/universal";
+import { colors, styles } from "@/components/universal";
 import { getSupabase } from "@/lib/supabase";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
   ActivityIndicator,
   Alert,
+  Image,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -91,10 +92,14 @@ export default function SignInScreen() {
         contentContainerStyle={styles.LoginContainer}
         keyboardShouldPersistTaps="handled"
       >
-        <Text style={styles.LoginTitle}>Drop In</Text>
-        <Text style={styles.LoginSubtitle}>
-          Find your game. Join your community.
-        </Text>
+        <Image
+          source={require("../../assets/images/drop-in-logo.png")}
+          style={styles.LoginLogo}
+          resizeMode="contain"
+        />
+
+        <Text style={styles.LoginTitle}>DROP IN</Text>
+        <Text style={styles.LoginSubtitle}>Find your game. Join the fun.</Text>
 
         <View style={styles.LoginCard}>
           <Text style={styles.WelcomeTitle}>Welcome</Text>
@@ -103,6 +108,7 @@ export default function SignInScreen() {
           <TextInput
             style={styles.LoginInput}
             placeholder="name@example.com"
+            placeholderTextColor={colors.muted}
             value={email}
             onChangeText={setEmail}
             keyboardType="email-address"
@@ -114,6 +120,7 @@ export default function SignInScreen() {
           <TextInput
             style={styles.LoginInput}
             placeholder="Enter your password"
+            placeholderTextColor={colors.muted}
             value={password}
             onChangeText={setPassword}
             secureTextEntry

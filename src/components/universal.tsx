@@ -254,19 +254,27 @@ export const styles = StyleSheet.create({
     paddingVertical: 32,
   },
 
+  LoginLogo: {
+    width: 82,
+    height: 82,
+    alignSelf: "center",
+    marginBottom: 10,
+  },
+
   LoginTitle: {
-    fontSize: 42,
-    fontWeight: "700",
+    fontSize: 38,
+    fontWeight: "800",
+    letterSpacing: 3,
     textAlign: "center",
-    color: colors.text,
-    marginBottom: 8,
+    color: colors.primary,
   },
 
   LoginSubtitle: {
-    fontSize: 15,
+    fontSize: 14,
     textAlign: "center",
     color: colors.secondary,
-    marginBottom: 32,
+    marginTop: 8,
+    marginBottom: 26,
   },
 
   LoginCard: {

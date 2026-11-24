@@ -1,4 +1,4 @@
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import type { Session } from "@supabase/supabase-js";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack, useRouter, useSegments } from "expo-router";
@@ -8,6 +8,7 @@ import { ActivityIndicator, View } from "react-native";
 const queryClient = new QueryClient();
 
 export default function RootLayout() {
+  const supabase = getSupabase();
   const router = useRouter();
   const segments = useSegments();
   const [session, setSession] = useState<Session | null>(null);
@@ -28,7 +29,7 @@ export default function RootLayout() {
     );
 
     return () => listener.subscription.unsubscribe();
-  }, []);
+  }, [supabase]);
 
   useEffect(() => {
     if (loading) return;
