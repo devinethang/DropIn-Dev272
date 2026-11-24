@@ -1,5 +1,7 @@
 import { colors, styles } from "@/components/universal";
-import { DATA, gameList } from "@/data/games";
+import { GameQueryState } from "@/components/GameQueryState";
+import { formatGameDate, formatGameTime, type Game } from "@/data/games";
+import { useGames } from "@/hooks/useGames";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -26,15 +28,16 @@ export default function Index() {
   const [selectedSport, setSelectedSport] = useState("All");
   const [search, setSearch] = useState("");
   const [showAll, setShowAll] = useState(false);
+  const gamesQuery = useGames();
 
   const query = search.trim().toLowerCase();
 
-  const filteredGames = DATA.filter((game) => {
+  const filteredGames = (gamesQuery.data ?? []).filter((game) => {
     const matchesSport =
       selectedSport === "All" || game.sport === selectedSport;
 
     const matchesSearch =
-      game.name.toLowerCase().includes(query) ||
+      game.title.toLowerCase().includes(query) ||
       game.sport.toLowerCase().includes(query) ||
       game.location.toLowerCase().includes(query);
 
@@ -45,7 +48,7 @@ export default function Index() {
 
   const visibleGames = isBrowsing ? filteredGames : filteredGames.slice(0, 1);
 
-  const renderItem = ({ item }: { item: gameList }) => (
+  const renderItem = ({ item }: { item: Game }) => (
     <Pressable
       onPress={() =>
         router.push({
@@ -54,10 +57,6 @@ export default function Index() {
         })
       }
       style={styles.listButton}
-      // Accessibility info
-      accessibilityRole="button"
-      accessibilityLabel={`Name: ${item.name}, Sport: ${item.sport}, Date: ${item.date} at ${item.time}`}
-      accessibilityHint="Opens game details"
     >
       <View
         style={{
@@ -68,7 +67,7 @@ export default function Index() {
         }}
       >
         <Text style={[styles.cardTitle, { flex: 1 }]} numberOfLines={2}>
-          {item.name}
+          {item.title}
         </Text>
 
         <View
@@ -92,7 +91,7 @@ export default function Index() {
       </View>
 
       <Text style={styles.cardSub}>
-        {item.date} at {item.time}
+        {formatGameDate(item.event_date)} at {formatGameTime(item.event_date)}
       </Text>
 
       <Text style={styles.cardSub}>{item.location}</Text>
@@ -331,20 +330,28 @@ export default function Index() {
           </View>
         }
         ListEmptyComponent={
-          <View
-            style={[
-              styles.card,
-              {
-                alignItems: "center",
-                paddingVertical: 32,
-              },
-            ]}
-          >
-            <Text style={styles.cardTitle}>No games available</Text>
-            <Text style={styles.cardSub}>
-              Try another sport or search term.
-            </Text>
-          </View>
+          gamesQuery.isLoading || gamesQuery.isError ? (
+            <GameQueryState
+              isLoading={gamesQuery.isLoading}
+              isError={gamesQuery.isError}
+              retry={() => void gamesQuery.refetch()}
+            />
+          ) : (
+            <View
+              style={[
+                styles.card,
+                {
+                  alignItems: "center",
+                  paddingVertical: 32,
+                },
+              ]}
+            >
+              <Text style={styles.cardTitle}>No games available</Text>
+              <Text style={styles.cardSub}>
+                Try another sport or search term.
+              </Text>
+            </View>
+          )
         }
       />
     </View>
