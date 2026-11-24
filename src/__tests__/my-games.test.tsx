@@ -7,6 +7,13 @@ import {
 } from "../data/games";
 
 const mockPush = jest.fn();
+const mockCancel = jest.fn();
+const mockUseGames = jest.fn();
+
+jest.mock("../hooks/useGames", () => ({
+  useGames: () => mockUseGames(),
+  useCancelGame: () => ({ mutateAsync: mockCancel, isPending: false }),
+}));
 
 jest.mock("expo-router", () => ({
   useRouter: () => ({ push: mockPush }),
@@ -14,6 +21,13 @@ jest.mock("expo-router", () => ({
 
 beforeEach(() => {
   mockPush.mockClear();
+  mockCancel.mockReset().mockResolvedValue(undefined);
+  mockUseGames.mockReturnValue({
+    data: PLACEHOLDER_GAMES,
+    isLoading: false,
+    isError: false,
+    refetch: jest.fn(),
+  });
 });
 
 // React Native Testing Library v14: render and fireEvent are async, so await them.
@@ -48,18 +62,23 @@ describe("My Games screen", () => {
     });
   });
 
-  it("removes a hosted game when it is cancelled", async () => {
+  it("requests cancellation of a hosted game", async () => {
     await render(<MyGamesScreen />);
 
     await fireEvent.press(screen.getByText("Hosting"));
     await fireEvent.press(screen.getByText("Cancel game"));
 
-    expect(screen.queryByText("Morning soccer")).toBeNull();
-    expect(screen.getByText("You aren't hosting any games yet.")).toBeTruthy();
+    expect(mockCancel).toHaveBeenCalledWith("3");
   });
 
   it("shows an empty state when the user has no games", async () => {
-    await render(<MyGamesScreen initialGames={[]} />);
+    mockUseGames.mockReturnValue({
+      data: [],
+      isLoading: false,
+      isError: false,
+      refetch: jest.fn(),
+    });
+    await render(<MyGamesScreen />);
 
     expect(screen.getByText("No upcoming games")).toBeTruthy();
     expect(screen.getByText("You haven't joined any games yet.")).toBeTruthy();
