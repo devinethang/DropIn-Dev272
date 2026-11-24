@@ -4,6 +4,8 @@ import { Pressable, Text, TextInput, View } from "react-native";
 
 export default function Invites() {
   const [text, onChangeText] = useState('');
+  
+
   return (
     <View style={styles.container}>
       <View style={{ marginTop: 55, marginBottom: 20 }}>
