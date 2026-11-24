@@ -1,4 +1,7 @@
 import { colors, styles } from "@/components/universal";
+import { GameQueryState } from "@/components/GameQueryState";
+import { formatGameDate, formatGameTime, type Game } from "@/data/games";
+import { useGames } from "@/hooks/useGames";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -9,7 +12,6 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { DATA, gameList } from "./index";
 
 const sports = [
   "All",
@@ -24,22 +26,23 @@ export default function Explore() {
   const router = useRouter();
   const [selectedSport, setSelectedSport] = useState("All");
   const [search, setSearch] = useState("");
+  const gamesQuery = useGames();
 
   const query = search.trim().toLowerCase();
 
-  const filteredGames = DATA.filter((game) => {
+  const filteredGames = (gamesQuery.data ?? []).filter((game) => {
     const matchesSport =
       selectedSport === "All" || game.sport === selectedSport;
 
     const matchesSearch =
-      game.name.toLowerCase().includes(query) ||
+      game.title.toLowerCase().includes(query) ||
       game.sport.toLowerCase().includes(query) ||
       game.location.toLowerCase().includes(query);
 
     return matchesSport && matchesSearch;
   });
 
-  const renderItem = ({ item }: { item: gameList }) => (
+  const renderItem = ({ item }: { item: Game }) => (
     <Pressable
       onPress={() =>
         router.push({
@@ -58,7 +61,7 @@ export default function Explore() {
         }}
       >
         <Text style={[styles.cardTitle, { flex: 1 }]} numberOfLines={2}>
-          {item.name}
+          {item.title}
         </Text>
 
         <View
@@ -82,7 +85,7 @@ export default function Explore() {
       </View>
 
       <Text style={styles.cardSub}>
-        {item.date} at {item.time}
+        {formatGameDate(item.event_date)} at {formatGameTime(item.event_date)}
       </Text>
 
       <Text style={styles.cardSub}>{item.location}</Text>
@@ -217,20 +220,28 @@ export default function Explore() {
           </View>
         }
         ListEmptyComponent={
-          <View
-            style={[
-              styles.card,
-              {
-                alignItems: "center",
-                paddingVertical: 32,
-              },
-            ]}
-          >
-            <Text style={styles.cardTitle}>No games available</Text>
-            <Text style={styles.cardSub}>
-              Try another sport or search term.
-            </Text>
-          </View>
+          gamesQuery.isLoading || gamesQuery.isError ? (
+            <GameQueryState
+              isLoading={gamesQuery.isLoading}
+              isError={gamesQuery.isError}
+              retry={() => void gamesQuery.refetch()}
+            />
+          ) : (
+            <View
+              style={[
+                styles.card,
+                {
+                  alignItems: "center",
+                  paddingVertical: 32,
+                },
+              ]}
+            >
+              <Text style={styles.cardTitle}>No games available</Text>
+              <Text style={styles.cardSub}>
+                Try another sport or search term.
+              </Text>
+            </View>
+          )
         }
       />
     </View>

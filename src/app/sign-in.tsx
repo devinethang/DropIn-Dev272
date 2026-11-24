@@ -1,5 +1,5 @@
 import { styles } from "@/components/universal";
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 import { router } from "expo-router";
 import { useState } from "react";
 import {
@@ -15,6 +15,7 @@ import {
 } from "react-native";
 
 export default function SignInScreen() {
+  const supabase = getSupabase();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);

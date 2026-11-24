@@ -1,12 +1,8 @@
-// Placeholder game data until Supabase is connected (#20).
-// Field names follow the Events and Participants tables in the
-// Software Development Plan, so swapping in real data later only
-// changes this file, not the screens.
-
 export type Game = {
   id: string;
   title: string;
   sport: string;
+  description?: string | null;
   event_date: string; // ISO 8601
   location: string;
   capacity: number;
@@ -17,6 +13,7 @@ export type Game = {
 // Stand in for the signed in user until auth is configured.
 export const CURRENT_USER_ID = "user-1";
 
+// Test fixtures; screens fetch real data instead.
 export const PLACEHOLDER_GAMES: Game[] = [
   {
     id: "1",

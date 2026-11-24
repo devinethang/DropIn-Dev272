@@ -1,14 +1,23 @@
 import { useMemo, useState } from "react";
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { EmptyState } from "../../components/EmptyState";
 import { GameCard } from "../../components/GameCard";
+import { GameQueryState } from "../../components/GameQueryState";
+import { useCancelGame, useGames } from "../../hooks/useGames";
+import { errorMessage } from "../../lib/errorMessage";
 import {
   CURRENT_USER_ID,
-  PLACEHOLDER_GAMES,
   getHostedGames,
   getJoinedGames,
-  type Game,
 } from "../../data/games";
 
 type Tab = "joined" | "hosting";
@@ -23,38 +32,32 @@ const EMPTY_MESSAGES: Record<Tab, string> = {
   hosting: "You aren't hosting any games yet.",
 };
 
-type Props = {
-  // The router renders this screen with no props, so these defaults are used.
-  // Tests pass their own values.
-  initialGames?: Game[];
-  userId?: string;
-};
-
-export default function MyGamesScreen({
-  initialGames = PLACEHOLDER_GAMES,
-  userId = CURRENT_USER_ID,
-}: Props) {
+export default function MyGamesScreen() {
   const router = useRouter();
-  const [games, setGames] = useState<Game[]>(initialGames);
+  const gamesQuery = useGames();
+  const cancel = useCancelGame();
   const [tab, setTab] = useState<Tab>("joined");
 
-  const visible = useMemo(
-    () =>
-      tab === "joined"
-        ? getJoinedGames(games, userId)
-        : getHostedGames(games, userId),
-    [games, tab, userId],
-  );
+  const visible = useMemo(() => {
+    const games = gamesQuery.data ?? [];
+    return tab === "joined"
+      ? getJoinedGames(games, CURRENT_USER_ID)
+      : getHostedGames(games, CURRENT_USER_ID);
+  }, [gamesQuery.data, tab]);
 
   const openGame = (id: string) =>
     router.push({ pathname: "/game/[id]", params: { id } });
 
-  // Placeholder: removes the game locally. Will call Supabase once #20 is done.
-  const cancelGame = (id: string) =>
-    setGames((prev) => prev.filter((g) => g.id !== id));
+  const cancelGame = async (id: string) => {
+    try {
+      await cancel.mutateAsync(id);
+    } catch (error) {
+      Alert.alert("Unable to cancel game", errorMessage(error));
+    }
+  };
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen} edges={["top"]}>
       <View style={styles.content}>
         <View style={styles.header}>
           <Text style={styles.title} accessibilityRole="header">
@@ -92,19 +95,29 @@ export default function MyGamesScreen({
               game={item}
               onPress={() => openGame(item.id)}
               onCancel={
-                tab === "hosting" ? () => cancelGame(item.id) : undefined
+                tab === "hosting" && !cancel.isPending
+                  ? () => void cancelGame(item.id)
+                  : undefined
               }
             />
           )}
           ListEmptyComponent={
-            <EmptyState
-              title="No upcoming games"
-              message={EMPTY_MESSAGES[tab]}
-            />
+            gamesQuery.isLoading || gamesQuery.isError ? (
+              <GameQueryState
+                isLoading={gamesQuery.isLoading}
+                isError={gamesQuery.isError}
+                retry={() => void gamesQuery.refetch()}
+              />
+            ) : (
+              <EmptyState
+                title="No upcoming games"
+                message={EMPTY_MESSAGES[tab]}
+              />
+            )
           }
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

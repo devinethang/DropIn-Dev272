@@ -1,26 +1,41 @@
+import type { Database } from "@/types/database";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { AppState, Platform } from "react-native";
 import "react-native-url-polyfill/auto";
 
-const supabaseUrl = process.env.EXPO_PUBLIC_SUPABASE_URL!;
-const supabaseKey = process.env.EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY!;
+let client: SupabaseClient<Database> | undefined;
 
-export const supabase = createClient(supabaseUrl, supabaseKey, {
-  auth: {
-    storage: AsyncStorage,
-    autoRefreshToken: true,
-    persistSession: true,
-    detectSessionInUrl: false,
-  },
-});
+export function getSupabase(): SupabaseClient<Database> {
+  if (!client) {
+    const url = process.env.EXPO_PUBLIC_SUPABASE_URL;
+    const key = process.env.EXPO_PUBLIC_SUPABASE_KEY;
 
-if (Platform.OS !== "web") {
-  AppState.addEventListener("change", (state) => {
-    if (state === "active") {
-      supabase.auth.startAutoRefresh();
-    } else {
-      supabase.auth.stopAutoRefresh();
+    if (!url || !key) {
+      throw new Error(
+        "Missing EXPO_PUBLIC_SUPABASE_URL or EXPO_PUBLIC_SUPABASE_KEY. Check your .env file and restart Expo.",
+      );
     }
-  });
+
+    client = createClient<Database>(url, key, {
+      auth: {
+        storage: AsyncStorage,
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: false,
+      },
+    });
+
+    if (Platform.OS !== "web") {
+      AppState.addEventListener("change", (state) => {
+        if (state === "active") {
+          client?.auth.startAutoRefresh();
+        } else {
+          client?.auth.stopAutoRefresh();
+        }
+      });
+    }
+  }
+
+  return client;
 }

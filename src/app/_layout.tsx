@@ -1,8 +1,11 @@
 import { supabase } from "@/lib/supabase";
 import type { Session } from "@supabase/supabase-js";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack, useRouter, useSegments } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
+
+const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const router = useRouter();
@@ -54,11 +57,13 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="(tabs)" />
-      <Stack.Screen name="game/[id]" />
-      <Stack.Screen name="create" options={{ title: "Create" }} />
-      <Stack.Screen name="sign-in" options={{ title: "Sign In" }} />
-    </Stack>
+    <QueryClientProvider client={queryClient}>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="game/[id]" />
+        <Stack.Screen name="create" options={{ title: "Create" }} />
+        <Stack.Screen name="sign-in" options={{ title: "Sign In" }} />
+      </Stack>
+    </QueryClientProvider>
   );
 }
