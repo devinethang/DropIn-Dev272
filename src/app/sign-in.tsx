@@ -1,6 +1,5 @@
 import { colors, styles } from "@/components/universal";
 import { getSupabase } from "@/lib/supabase";
-import { router } from "expo-router";
 import { useState } from "react";
 import {
   ActivityIndicator,
@@ -39,8 +38,6 @@ export default function SignInScreen() {
         Alert.alert("Sign In Failed", error.message);
         return;
       }
-
-      router.replace("/");
     } catch {
       Alert.alert("Error", "Something went wrong. Please try again.");
     } finally {
@@ -74,8 +71,6 @@ export default function SignInScreen() {
         );
         return;
       }
-
-      router.replace("/");
     } catch {
       Alert.alert("Error", "Something went wrong. Please try again.");
     } finally {
