@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import { useMemo, useState } from "react";
 import {
   Alert,
@@ -7,18 +8,14 @@ import {
   Text,
   View,
 } from "react-native";
-import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { EmptyState } from "../../components/EmptyState";
 import { GameCard } from "../../components/GameCard";
 import { GameQueryState } from "../../components/GameQueryState";
+import { getHostedGames, getJoinedGames } from "../../data/games";
+import { useCurrentUserId } from "../../hooks/useCurrentUserId";
 import { useCancelGame, useGames } from "../../hooks/useGames";
 import { errorMessage } from "../../lib/errorMessage";
-import {
-  CURRENT_USER_ID,
-  getHostedGames,
-  getJoinedGames,
-} from "../../data/games";
 
 type Tab = "joined" | "hosting";
 
@@ -37,13 +34,15 @@ export default function MyGamesScreen() {
   const gamesQuery = useGames();
   const cancel = useCancelGame();
   const [tab, setTab] = useState<Tab>("joined");
+  const userId = useCurrentUserId();
 
   const visible = useMemo(() => {
     const games = gamesQuery.data ?? [];
+    if (!userId) return [];
     return tab === "joined"
-      ? getJoinedGames(games, CURRENT_USER_ID)
-      : getHostedGames(games, CURRENT_USER_ID);
-  }, [gamesQuery.data, tab]);
+      ? getJoinedGames(games, userId)
+      : getHostedGames(games, userId);
+  }, [gamesQuery.data, tab, userId]);
 
   const openGame = (id: string) =>
     router.push({ pathname: "/game/[id]", params: { id } });

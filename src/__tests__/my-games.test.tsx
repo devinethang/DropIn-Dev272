@@ -19,6 +19,10 @@ jest.mock("expo-router", () => ({
   useRouter: () => ({ push: mockPush }),
 }));
 
+jest.mock("../hooks/useCurrentUserId", () => ({
+  useCurrentUserId: () => "user-1",
+}));
+
 beforeEach(() => {
   mockPush.mockClear();
   mockCancel.mockReset().mockResolvedValue(undefined);

@@ -10,9 +10,6 @@ export type Game = {
   participant_ids: string[]; // user ids who joined (host included)
 };
 
-// Stand in for the signed in user until auth is configured.
-export const CURRENT_USER_ID = "user-1";
-
 // Test fixtures; screens fetch real data instead.
 export const PLACEHOLDER_GAMES: Game[] = [
   {
