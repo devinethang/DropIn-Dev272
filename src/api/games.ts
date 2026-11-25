@@ -36,3 +36,33 @@ export async function cancelGame(id: string): Promise<void> {
   if (!data)
     throw new Error("The game was not found or could not be cancelled.");
 }
+
+export async function joinGame(gameId: string): Promise<void> {
+  const supabase = getSupabase();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("You must be signed in to join a game.");
+
+  const { error } = await supabase
+    .from("participants")
+    .insert({ game_id: gameId, user_id: user.id });
+  if (error) throw error;
+}
+
+export async function leaveGame(gameId: string): Promise<void> {
+  const supabase = getSupabase();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("You must be signed in to leave a game.");
+
+  const { error } = await supabase
+    .from("participants")
+    .delete()
+    .eq("game_id", gameId)
+    .eq("user_id", user.id);
+  if (error) throw error;
+}

@@ -21,13 +21,15 @@ grant select, insert, update, delete on public.games, public.participants to ano
 
 alter table public.games enable row level security;
 alter table public.participants enable row level security;
+alter table public.participants
+add constraint participants_game_user_unique unique (game_id, user_id);
 
 create policy "dev: read games" on public.games for select to anon, authenticated using (true);
-create policy "dev: create games" on public.games for insert to anon, authenticated with check (true);
-create policy "dev: cancel games" on public.games for delete to anon, authenticated using (true);
-create policy "dev: read participants" on public.participants for select to anon, authenticated using (true);
-create policy "dev: join games" on public.participants for insert to anon, authenticated with check (true);
-create policy "dev: leave games" on public.participants for delete to anon, authenticated using (true);
+create policy "Users can create games as themselves" on public.games for insert to authenticated with check (auth.uid() = created_by);
+create policy "Hosts can cancel their games" on public.games for delete to authenticated using (auth.uid() = created_by);
+create policy "Signed-in users can view participants" on public.participants for select to authenticated using (true);
+create policy "Users join as themselves" on public.participants for insert to authenticated with check (auth.uid() = user_id);
+create policy "Users can leave their games" on public.participants for delete to authenticated using (auth.uid() = user_id);
 
 create function public.add_game_host() returns trigger
 language plpgsql
