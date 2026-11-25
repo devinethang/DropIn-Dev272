@@ -1,6 +1,5 @@
 import { colors, styles } from "@/components/universal";
 import { parseGameDate } from "@/data/gameDate";
-import { CURRENT_USER_ID } from "@/data/games";
 import { useCreateGame } from "@/hooks/useGames";
 import { errorMessage } from "@/lib/errorMessage";
 import { useRouter } from "expo-router";
@@ -16,6 +15,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useCurrentUserId } from "../hooks/useCurrentUserId";
 
 const sports = [
   "Soccer",
@@ -29,6 +29,7 @@ const sports = [
 export default function CreateGame() {
   const router = useRouter();
   const createGame = useCreateGame();
+  const userId = useCurrentUserId();
 
   const [title, setTitle] = useState("");
   const [sport, setSport] = useState("");
@@ -74,6 +75,11 @@ export default function CreateGame() {
     }
 
     try {
+      if (!userId) {
+        Alert.alert("Not signed in", "Please sign in to host a game.");
+        return;
+      }
+
       await createGame.mutateAsync({
         title: title.trim(),
         sport,
@@ -81,7 +87,7 @@ export default function CreateGame() {
         event_date: eventDate,
         capacity: maxPlayers,
         description: notes.trim() || null,
-        created_by: CURRENT_USER_ID,
+        created_by: userId,
       });
       Alert.alert("Game posted", "Your game is now available.", [
         { text: "OK", onPress: () => router.replace("/") },
