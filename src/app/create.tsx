@@ -1,4 +1,7 @@
 import { colors, styles } from "@/components/universal";
+import { parseGameDate } from "@/data/gameDate";
+import { useCreateGame } from "@/hooks/useGames";
+import { errorMessage } from "@/lib/errorMessage";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -12,6 +15,7 @@ import {
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useCurrentUserId } from "../hooks/useCurrentUserId";
 
 const sports = [
   "Soccer",
@@ -24,7 +28,10 @@ const sports = [
 
 export default function CreateGame() {
   const router = useRouter();
+  const createGame = useCreateGame();
+  const userId = useCurrentUserId();
 
+  const [title, setTitle] = useState("");
   const [sport, setSport] = useState("");
   const [showSports, setShowSports] = useState(false);
   const [location, setLocation] = useState("");
@@ -33,9 +40,10 @@ export default function CreateGame() {
   const [maxPlayers, setMaxPlayers] = useState(10);
   const [notes, setNotes] = useState("");
 
-  const handlePostGame = () => {
+  const handlePostGame = async () => {
     const missingFields: string[] = [];
 
+    if (!title.trim()) missingFields.push("title");
     if (!sport.trim()) missingFields.push("sport");
     if (!location.trim()) missingFields.push("location");
     if (!date.trim()) missingFields.push("date");
@@ -57,16 +65,36 @@ export default function CreateGame() {
       return;
     }
 
-    Alert.alert(
-      "Game details ready",
-      "Your game is ready! It will go live once game publishing is connected.",
-      [
-        {
-          text: "OK",
-          onPress: () => router.replace("/"),
-        },
-      ],
-    );
+    const eventDate = parseGameDate(date, time);
+    if (!eventDate) {
+      Alert.alert(
+        "Invalid date or time",
+        "Enter a valid date (MM/DD/YYYY) and time (for example 5:00 PM).",
+      );
+      return;
+    }
+
+    try {
+      if (!userId) {
+        Alert.alert("Not signed in", "Please sign in to host a game.");
+        return;
+      }
+
+      await createGame.mutateAsync({
+        title: title.trim(),
+        sport,
+        location: location.trim(),
+        event_date: eventDate,
+        capacity: maxPlayers,
+        description: notes.trim() || null,
+        created_by: userId,
+      });
+      Alert.alert("Game posted", "Your game is now available.", [
+        { text: "OK", onPress: () => router.replace("/") },
+      ]);
+    } catch (error) {
+      Alert.alert("Unable to post game", errorMessage(error));
+    }
   };
 
   return (
@@ -121,6 +149,18 @@ export default function CreateGame() {
           >
             Bring your community together. Host a game!
           </Text>
+
+          <View style={{ gap: 8 }}>
+            <Text style={styles.label}>Game Title</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Name your game"
+              placeholderTextColor={colors.muted}
+              value={title}
+              onChangeText={setTitle}
+              accessibilityLabel="Game title"
+            />
+          </View>
 
           <View style={{ gap: 8 }}>
             <Text style={styles.label}>Sport</Text>
@@ -317,10 +357,14 @@ export default function CreateGame() {
                 marginTop: 12,
               },
             ]}
-            onPress={handlePostGame}
+            onPress={() => void handlePostGame()}
             accessibilityRole="button"
+            accessibilityState={{ disabled: createGame.isPending }}
+            disabled={createGame.isPending}
           >
-            <Text style={styles.buttonText}>Post Game</Text>
+            <Text style={styles.buttonText}>
+              {createGame.isPending ? "Posting..." : "Post Game"}
+            </Text>
           </Pressable>
         </ScrollView>
       </KeyboardAvoidingView>

@@ -1,14 +1,37 @@
+import { joinGame, leaveGame } from "@/api/games";
+import { GameQueryState } from "@/components/GameQueryState";
 import { styles } from "@/components/universal";
-import { DATA } from "@/data/games";
+import { formatGameDate, formatGameTime } from "@/data/games";
+import { useCurrentUserId } from "@/hooks/useCurrentUserId";
+import { useGames } from "@/hooks/useGames";
+import { errorMessage } from "@/lib/errorMessage";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { useState } from "react";
+import { Alert, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function GameDetails() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
 
-  const game = DATA.find((item) => item.id === id);
+  const gamesQuery = useGames();
+  const game = gamesQuery.data?.find((item) => item.id === id);
+  const userId = useCurrentUserId();
+  const [pending, setPending] = useState(false);
+
+  if (gamesQuery.isLoading || gamesQuery.isError) {
+    return (
+      <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
+        <View style={styles.container}>
+          <GameQueryState
+            isLoading={gamesQuery.isLoading}
+            isError={gamesQuery.isError}
+            retry={() => void gamesQuery.refetch()}
+          />
+        </View>
+      </SafeAreaView>
+    );
+  }
 
   if (!game) {
     return (
@@ -26,11 +49,32 @@ export default function GameDetails() {
     );
   }
 
+  const hasJoined = userId !== null && game.participant_ids.includes(userId);
+  async function handlePress() {
+    if (!game) return;
+    setPending(true);
+    try {
+      if (hasJoined) {
+        await leaveGame(game.id);
+      } else {
+        await joinGame(game.id);
+      }
+      await gamesQuery.refetch();
+    } catch (error) {
+      Alert.alert(
+        hasJoined ? "Unable to leave game" : "Unable to join game",
+        errorMessage(error),
+      );
+    } finally {
+      setPending(false);
+    }
+  }
+
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
       <ScrollView contentContainerStyle={styles.form}>
-        <View accessible={true} accessibilityLabel={`Name: ${game.name}`}>
-          <Text style={styles.title}>{game.name}</Text>
+        <View accessible={true} accessibilityLabel={`Name: ${game.title}`}>
+          <Text style={styles.title}>{game.title}</Text>
         </View>
 
         <View style={styles.dataDisplay}>
@@ -39,14 +83,20 @@ export default function GameDetails() {
             <Text>{game.sport}</Text>
           </View>
 
-          <View accessible={true} accessibilityLabel={`Date: ${game.date}`}>
+          <View
+            accessible={true}
+            accessibilityLabel={`Date: ${formatGameDate(game.event_date)}`}
+          >
             <Text style={styles.cardTitle}>Date</Text>
-            <Text>{game.date}</Text>
+            <Text>{formatGameDate(game.event_date)}</Text>
           </View>
 
-          <View accessible={true} accessibilityLabel={`Time: ${game.time}`}>
+          <View
+            accessible={true}
+            accessibilityLabel={`Time: ${formatGameTime(game.event_date)}`}
+          >
             <Text style={styles.cardTitle}>Time</Text>
-            <Text>{game.time}</Text>
+            <Text>{formatGameTime(game.event_date)}</Text>
           </View>
 
           <View
@@ -60,19 +110,24 @@ export default function GameDetails() {
 
         <View style={styles.dataDisplay}>
           <Text style={styles.cardTitle}>Description</Text>
-          <Text>
-            Join this recreational {game.sport.toLowerCase()} game and enjoy
-            playing with other members of the community.
-          </Text>
+          <Text>{game.description || "No description provided."}</Text>
         </View>
 
         <Pressable
           style={styles.LoginButton}
+          onPress={handlePress}
           accessibilityRole="button"
-          accessibilityState={{ disabled: true }}
-          disabled
+          disabled={pending || userId === null}
+          accessibilityLabel={hasJoined ? "Leave game" : "Join Game"}
+          accessibilityState={{ disabled: pending || userId === null }}
         >
-          <Text style={styles.buttonText}>Join Game</Text>
+          <Text style={styles.buttonText}>
+            {pending
+              ? "Processing..."
+              : hasJoined
+                ? "Leave Game"
+                : "Join Game"}{" "}
+          </Text>
         </Pressable>
 
         <Pressable

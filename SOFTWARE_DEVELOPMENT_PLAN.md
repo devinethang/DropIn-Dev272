@@ -12,7 +12,7 @@
 
 This project aims to develop a mobile application that connects people through sports by helping them discover, organize, and participate in local recreational sports games.
 
-Users will be able to explore available games, view game details, create games, and join or leave activities. The app will also support email invitations for friends and family and real-time in-app messaging between players.
+Users will be able to explore available games, view game details, create games, and join or leave activities. The app will also support user profile functionality, email invitations for friends and family, and real-time in-app messaging between players.
 
 ### Problem
 
@@ -32,6 +32,7 @@ To make it easier for people to connect through recreational sports by discoveri
 - Develop a functional mobile application for recreational sports.
 - Allow users to discover, create, join, and leave games.
 - Provide an accessible and straightforward navigation experience.
+- Allow users to personalize and manage their accounts.
 - Support email invitations and real-time communication between players.
 - Store game information remotely and maintain relevant user preferences locally.
 - Validate the application's functionality through testing and quality assurance.
@@ -57,6 +58,7 @@ To make it easier for people to connect through recreational sports by discoveri
 5. **Email Invitations:** Invite friends and family to participate in games using email addresses.
 6. **My Games:** View games created or joined by the user.
 7. **Real-Time Messaging:** Allow players to communicate through in-app messages.
+8. **User Profile:** Allow users to view their account information, upload and update profile photos, sign out, and delete their accounts.
 
 ---
 
@@ -73,6 +75,7 @@ To make it easier for people to connect through recreational sports by discoveri
 - My Games screen.
 - Email invitations for friends and family.
 - Real-time in-app messaging.
+- User profile with profile photo upload, Sign Out, and Delete Account functionality.
 - Remote game storage and data retrieval.
 - Local persistence for selected user preferences.
 - Navigation, loading states, error handling, and testing.
@@ -160,12 +163,12 @@ To make it easier for people to connect through recreational sports by discoveri
 
 | Deliverable | Owner |
 |---|---|
-| Supabase event data integration | To be assigned |
-| User sign-in and authentication | To be assigned |
-| Create Game and Supabase integration | To be assigned |
-| Join and Leave Game functionality | To be assigned |
+| Supabase event data integration | `alexmorari7` |
+| User sign-in and authentication | `MM-109` |
+| Create Game and Supabase integration | `alexmorari7` |
+| Join and Leave Game functionality | `devinethang` |
 | Initial real-time messaging structure | `devinethang` |
-| Initial email invitation structure | `MM-109` |
+| Initial email invitation structure | `jordangatewood28` |
 | Sprint 2 QA: Authentication and game management functionality | `MM-109`, `jordangatewood28` |
 
 **Sprint Goal**
@@ -174,34 +177,44 @@ Implement functional authentication, remote game creation and retrieval, and gam
 
 **Due Date:** November 24, 2026
 
-### Week 4: Messaging and Invitations (Sprint 3)
+### Week 4: User Profile and Communication (Sprint 3)
 
 **Planned Work**
 
+- Create a user profile screen and integrate it into the app navigation.
+- Display authenticated user account information.
+- Implement profile photo upload and updates using Supabase Storage.
+- Implement Sign Out and Delete Account functionality.
 - Build upon the messaging structure established during Sprint 2.
 - Implement real-time in-app messaging using Supabase.
 - Develop the messaging interface and connect it to backend data.
 - Build upon the email invitation structure established during Sprint 2.
 - Implement email invitations for friends and family.
-- Connect invitations to games and recipient email addresses.
-- Handle invitation responses and relevant status updates.
-- Test messaging, invitations, and navigation between related screens.
+- Associate invitations with selected games and include game details in invitation emails.
+- Handle loading, validation, success, and error states where applicable.
+- Test user profile, real-time messaging, and email invitation functionality.
+- Perform regression testing and verify code quality checks.
 - Document bugs and verify fixes.
 
 **Deliverables**
 
 | Deliverable | Owner |
 |---|---|
-| Real-time messaging functionality | Backend and frontend team |
-| Messaging interface and integration | Backend and frontend team |
-| Email invitation functionality | `MM-109` |
-| Invitation status and game integration | To be assigned |
-| Sprint 3 QA: Messaging and invitation functionality | `MM-109`, `jordangatewood28` |
+| User profile and account management | `MM-109` |
+| Real-time in-app messaging | `jordangatewood28`, `alexmorari7` |
+| Email invitation functionality | `alexmorari7`, `devinethang` |
+| Sprint 3 QA: User profile and communication functionality | `MM-109`, `jordangatewood28` |
 | Sprint review and scope adjustments | `devinethang` |
 
 **Sprint Goal**
 
-Develop functional real-time messaging and email invitations using the foundations established in Sprint 2.
+Implement a functional user profile with profile photo, Sign Out, and Delete Account features while expanding the real-time messaging and email invitation structures established during Sprint 2.
+
+**Due Date:** December 01, 2026
+
+**Holiday Alert**
+
+Sprint 3 falls during Thanksgiving week. The team acknowledges that members may have limited availability due to holiday commitments. 
 
 ### Week 5: Integration and Feature Completion (Sprint 4)
 
@@ -255,12 +268,13 @@ Develop functional real-time messaging and email invitations using the foundatio
 | Success Criterion | Measurement | Primary Owner |
 |---|---|---|
 | Navigation works correctly | Users can navigate between all required screens without errors | `MM-109`, `jordangatewood28` |
-| User authentication works | Users can sign in and maintain authenticated sessions | Assigned during sprint planning |
-| Game creation works | Valid submissions are saved to Supabase; invalid submissions display errors | Frontend and backend team |
-| Game data integration works | Games are retrieved from Supabase and displayed correctly | Frontend and backend team |
-| Game participation works | Joining or leaving a game updates participation records | Assigned during sprint planning |
-| Email invitations work | Users can invite friends and family through email and respond to invitations | `MM-109` |
-| Real-time messaging works | Players can exchange messages with updates appearing in real time | Backend and frontend team |
+| User authentication works | Users can sign in and maintain authenticated sessions | `MM-109` |
+| Game creation works | Valid submissions are saved to Supabase; invalid submissions display errors | `alexmorari7` |
+| Game data integration works | Games are retrieved from Supabase and displayed correctly | `alexmorari7` |
+| Game participation works | Joining or leaving a game updates participation records | `devinethang` |
+| User profile works | Users can view their account information, upload and update profile photos, sign out, and delete their accounts | `MM-109` |
+| Email invitations work | Users can invite friends and family through email with the correct game information | `alexmorari7`, `devinethang` |
+| Real-time messaging works | Players can send and receive messages with updates appearing in real time | `jordangatewood28`, `alexmorari7` |
 | Application quality | Automated tests and required quality checks pass | `MM-109`, `jordangatewood28` |
 | Sprint QA coverage | Each sprint includes a dedicated QA issue, documented results, and verification of completed functionality | `MM-109`, `jordangatewood28` |
 | User experience | Screens follow agreed wireframes and provide clear feedback | `devinethang`, `alexmorari7` |
@@ -277,6 +291,7 @@ QA testing and UI consistency will take place throughout development rather than
 | TypeScript | Type-safe application code |
 | Expo Router | Screen navigation, tabs, stack navigation, and dynamic routes |
 | Supabase | Remote database, authentication, backend services, and real-time messaging |
+| Supabase Storage | Profile photo storage |
 | TanStack Query | Remote data fetching, caching, and synchronization |
 | AsyncStorage | Local persistence |
 | React Hook Form and Zod | Form management and validation |
@@ -297,12 +312,12 @@ The following is a proposed initial data model. The team will review and finaliz
 | Table or API Resource | Fields | Screens That Use It |
 |---|---|---|
 | Games | `id`, `title`, `sport`, `description`, `location`, `game_date`, `capacity`, `created_by` | Home, Explore, Game Details, Create Game |
-| Profiles | `id`, `display_name`, `email` | Sign In, Game Details, My Games, Invites |
+| Profiles | `id`, `display_name`, `email`, `profile_photo_url` | Sign In, Profile, Game Details, My Games, Invites |
 | Participants | `id`, `game_id`, `user_id`, `status` | Game Details, My Games |
 | Invitations | `id`, `game_id`, `sender_id`, `recipient_email`, `status` | Invites, Game Details |
 | Messages | `id`, `sender_id`, `recipient_id`, `content`, `created_at` | Messaging |
 
-The messaging and invitation data structures will begin development in Sprint 2 and be expanded during Sprint 3.
+The messaging and invitation data structures will begin development in Sprint 2 and be expanded during Sprint 3. The user profile structure will also be expanded during Sprint 3 to support profile photos and account management functionality.
 
 ---
 
@@ -355,7 +370,7 @@ Microsoft Teams is the team's agreed communication platform for meetings, progre
 - Create and refine wireframes and user flows.
 - Review UI consistency and user experience.
 - Help ensure the project remains within scope.
-- Support real-time messaging development.
+- Support game participation and email invitation development.
 
 ### Frontend Developer and Secondary QA: `jordangatewood28`
 
@@ -364,6 +379,7 @@ Microsoft Teams is the team's agreed communication platform for meetings, progre
 - Implement screens, navigation, and reusable UI components.
 - Develop user-facing forms and interactions.
 - Connect frontend components to backend services.
+- Develop the real-time messaging interface and support its integration.
 - Address frontend bugs and usability issues.
 
 **Secondary Responsibilities: Quality Assurance**
@@ -380,7 +396,8 @@ Microsoft Teams is the team's agreed communication platform for meetings, progre
 
 - Design and maintain the Supabase database.
 - Implement data retrieval and modification operations.
-- Support game participation, invitation, and messaging logic.
+- Support game creation and participation functionality.
+- Develop backend functionality for real-time messaging and email invitations.
 - Manage backend integration and data integrity.
 
 **Secondary Responsibilities: UI/UX Design**
@@ -409,7 +426,7 @@ Microsoft Teams is the team's agreed communication platform for meetings, progre
 - Build reusable UI components and maintain consistent styling.
 - Implement frontend interactions and screen layouts.
 - Support frontend integration and resolve assigned issues.
-- Develop assigned email invitation functionality.
+- Implement user authentication and user profile functionality.
 - Collaborate with the team on frontend development and code reviews.
 
 Each member will also provide additional support through code reviews, testing, documentation, or troubleshooting as agreed by the team.

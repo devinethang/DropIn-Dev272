@@ -1,12 +1,8 @@
-// Placeholder game data until Supabase is connected (#20).
-// Field names follow the Events and Participants tables in the
-// Software Development Plan, so swapping in real data later only
-// changes this file, not the screens.
-
 export type Game = {
   id: string;
   title: string;
   sport: string;
+  description?: string | null;
   event_date: string; // ISO 8601
   location: string;
   capacity: number;
@@ -14,9 +10,7 @@ export type Game = {
   participant_ids: string[]; // user ids who joined (host included)
 };
 
-// Stand in for the signed in user until auth is configured.
-export const CURRENT_USER_ID = "user-1";
-
+// Test fixtures; screens fetch real data instead.
 export const PLACEHOLDER_GAMES: Game[] = [
   {
     id: "1",
@@ -47,59 +41,6 @@ export const PLACEHOLDER_GAMES: Game[] = [
     capacity: 12,
     created_by: "user-1",
     participant_ids: ["user-1", "user-6", "user-8"],
-  },
-];
-
-// Game Data
-export type gameList = {
-  id: string;
-  name: string;
-  sport: string;
-  date: string;
-  time: string;
-  location: string;
-};
-
-export const DATA: gameList[] = [
-  {
-    id: "1",
-    name: "Community Baseball Game",
-    sport: "Baseball",
-    date: "Saturday",
-    time: "10:00 AM",
-    location: "Local Baseball Field",
-  },
-  {
-    id: "2",
-    name: "Weekend Football",
-    sport: "Football",
-    date: "Sunday",
-    time: "12:00 PM",
-    location: "Community Sports Field",
-  },
-  {
-    id: "3",
-    name: "Pickup Basketball",
-    sport: "Basketball",
-    date: "Friday",
-    time: "5:00 PM",
-    location: "Community Basketball Court",
-  },
-  {
-    id: "4",
-    name: "Friendly Soccer Match",
-    sport: "Soccer",
-    date: "Saturday",
-    time: "2:00 PM",
-    location: "Local Soccer Field",
-  },
-  {
-    id: "5",
-    name: "Lacrosse Practice Game",
-    sport: "Lacrosse",
-    date: "Sunday",
-    time: "3:00 PM",
-    location: "Community Sports Park",
   },
 ];
 

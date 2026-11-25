@@ -247,4 +247,68 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 24,
     backgroundColor: colors.bg,
   },
+
+  LoginContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    paddingVertical: 32,
+  },
+
+  LoginLogo: {
+    width: 82,
+    height: 82,
+    alignSelf: "center",
+    marginBottom: 10,
+  },
+
+  LoginTitle: {
+    fontSize: 38,
+    fontWeight: "800",
+    letterSpacing: 3,
+    textAlign: "center",
+    color: colors.primary,
+  },
+
+  LoginSubtitle: {
+    fontSize: 14,
+    textAlign: "center",
+    color: colors.secondary,
+    marginTop: 8,
+    marginBottom: 26,
+  },
+
+  LoginCard: {
+    backgroundColor: colors.surface,
+    borderRadius: 24,
+    padding: 28,
+    borderWidth: 1,
+    borderColor: colors.border,
+    shadowColor: colors.secondary,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
+    elevation: 5,
+  },
+
+  LoginLabel: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: colors.secondary,
+    marginBottom: 8,
+  },
+
+  RegisterButton: {
+    height: 50,
+    backgroundColor: colors.blue,
+    borderRadius: 12,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 12,
+  },
+
+  RegisterButtonText: {
+    color: colors.text,
+    fontSize: 16,
+    fontWeight: "600",
+  },
 });
