@@ -152,7 +152,4 @@ export default function Invites() {
     </View>
   );
 }
-function setLoading(arg0: boolean) {
-  throw new Error("Function not implemented.");
-}
 
