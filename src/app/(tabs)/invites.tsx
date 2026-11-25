@@ -2,7 +2,7 @@ import { colors, styles } from "@/components/universal";
 import { getSupabase } from "@/lib/supabase";
 import { useRouter } from 'expo-router';
 import { useState } from "react";
-import { Alert, Pressable, Text, TextInput, View } from "react-native";
+import { Alert, Keyboard, Pressable, Text, TextInput, View } from "react-native";
 
 
 
@@ -13,9 +13,23 @@ export default function Invites() {
   const [loading, setLoading] = useState(false);
 
   const handleSendInvite = async (async: any) => {
-    const trimmedEmail = email.trim().toLowerCase()
+    const isValidEmail = (email: string): boolean => {
+      const trimmed = email.trim();
+      const parts = trimmed.split('@');
+      
+      if (parts.length !== 2) return false;
+      
+      const [local, domain] = parts;
+      if (!local || !domain) return false;
+      
+      const domainParts = domain.split('.');
+      if (domainParts.length < 2) return false;
+      if (domainParts.some((part) => part.length === 0)) return false;
 
-    if (!trimmedEmail || !trimmedEmail.includes('@')) {
+      return true;
+};
+
+    if (!isValidEmail) {
       Alert.alert('Invalid Email', 'Please enter a valid email address.');
       return;
     }
@@ -31,7 +45,7 @@ export default function Invites() {
       const { data, error: insertError } = await (getSupabase() as any)
         .from('invitations')
         .insert({
-          email: trimmedEmail,
+          email: isValidEmail,
           invited_by: user.id,
           game: game.trim()
         })
@@ -40,7 +54,7 @@ export default function Invites() {
 
       if (insertError) throw insertError;
 
-      Alert.alert('Success', `Invitation sent to ${trimmedEmail}`);
+      Alert.alert('Success', `Invitation sent to ${isValidEmail}`);
       setEmail('');
       router.back();
     } catch (error: any) {
@@ -133,6 +147,7 @@ export default function Invites() {
           onChangeText={setGame}
           value={game}
           placeholder='Placholder for games drop-down list' // I had a build for it, but bricked it trying to get it done, so I had to reclone.
+          onPress={Keyboard.dismiss}
         />
 
         <Text>Player</Text>
@@ -141,9 +156,13 @@ export default function Invites() {
           onChangeText={setEmail}
           value={email}
           placeholder='Player Name or Email'
+          onPress={Keyboard.dismiss}
         />
         <Pressable
-          onPress={handleSendInvite}
+          onPress={() => {
+            Keyboard.dismiss;
+            handleSendInvite;
+          }}
           style={styles.button} //Placeholder, we can polish this later.
         >
           <Text style={{ fontSize: 16 }}>Send Invite</Text>
