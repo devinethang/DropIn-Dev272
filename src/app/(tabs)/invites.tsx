@@ -9,6 +9,8 @@ import { Alert, Pressable, Text, TextInput, View } from "react-native";
 export default function Invites() {
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [game, setGame] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSendInvite = async (async: any) => {
     const trimmedEmail = email.trim().toLowerCase()
@@ -18,17 +20,21 @@ export default function Invites() {
       return;
     }
 
+    if (loading) return;
     setLoading(true);
 
     try {
       const { data: { user }, error: userError } = await getSupabase().auth.getUser();
+      const { data: { games }, error: gameError } = await getSupabase().auth.getUser();
       if (userError || !user) throw new Error('You must be logged in to send invites.');
+      if (gameError || !games) throw new Error('You must have a game selected to send invites.');
 
       const { data, error: insertError } = await (getSupabase() as any)
         .from('invitations')
         .insert({
           email: trimmedEmail,
           invited_by: user.id,
+          game: games.id
         })
         .select()
         .single();
@@ -125,8 +131,8 @@ export default function Invites() {
         <Text>Game</Text>
         <TextInput
           style={styles.input}
-          onChangeText={setEmail}
-          value={email}
+          onChangeText={setGame}
+          value={game}
           placeholder='Placholder for games drop-down list' // I had a build for it, but bricked it trying to get it done, so I had to reclone.
         />
 
@@ -138,6 +144,7 @@ export default function Invites() {
           placeholder='Player Name or Email'
         />
         <Pressable
+          onPress={handleSendInvite}
           style={styles.button} //Placeholder, we can polish this later.
         >
           <Text style={{ fontSize: 16 }}>Send Invite</Text>
