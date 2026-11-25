@@ -25,16 +25,15 @@ export default function Invites() {
 
     try {
       const { data: { user }, error: userError } = await getSupabase().auth.getUser();
-      const { data: { games }, error: gameError } = await getSupabase().auth.getUser();
       if (userError || !user) throw new Error('You must be logged in to send invites.');
-      if (gameError || !games) throw new Error('You must have a game selected to send invites.');
+      if (!game.trim()) throw new Error('You must have a game selected to send invites.');
 
       const { data, error: insertError } = await (getSupabase() as any)
         .from('invitations')
         .insert({
           email: trimmedEmail,
           invited_by: user.id,
-          game: games.id
+          game: game.trim()
         })
         .select()
         .single();
